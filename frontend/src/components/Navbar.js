@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, Button, Box, TextField, CircularProgress, List, ListItem, ListItemText, ListItemAvatar, Avatar } from '@mui/material';
+import React, { useState, useRef, useEffect } from 'react';
+import { AppBar, Toolbar, Button, Box, TextField, CircularProgress, List, ListItem, ListItemText, ListItemAvatar, Avatar } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -8,6 +9,8 @@ const Navbar = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+
+    const navbarRef = useRef(null);
 
     const handleLogout = () => {
         localStorage.removeItem('token'); // Clear the token
@@ -59,12 +62,31 @@ const Navbar = () => {
         setSearchResults([]);
     };
 
+    // Close search results if clicked outside the navbar
+    useEffect(() => {
+        const handleClickOutside = (event) => { // Removed type annotation
+            if (navbarRef.current && !navbarRef.current.contains(event.target)) { // Removed type assertion
+                setSearchResults([]); // Close search results
+                setSearchQuery(''); // Optionally reset the search query
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
     return (
-        <AppBar position="static" style={{ backgroundColor: '#121212' }}>
+        <AppBar position="static" style={{ backgroundColor: '#121212' }} ref={navbarRef}>
             <Toolbar>
-                <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                    OtakuScope
-                </Typography>
+            <Box sx={{ flexGrow: 1 }}>
+                <img
+                    src="\OtakuLOGO2.png"  // Update the path to where your image is stored
+                    alt="OtakuScope"
+                    style={{ height: '48px' }} // Adjust height as necessary
+                />
+            </Box>
                 <Box sx={{ flexGrow: 1, mx: 2, position: 'relative' }}>
                     <TextField
                         value={searchQuery}
@@ -74,7 +96,43 @@ const Navbar = () => {
                         size="small"
                         fullWidth
                         InputProps={{
-                            endAdornment: loading && <CircularProgress size={20} />,
+                            endAdornment: (
+                                <>
+                                    {loading ? (
+                                        <CircularProgress
+                                            size={24}
+                                            sx={{
+                                                color: '#00f0ff',
+                                            }}
+                                        />
+                                    ) : (
+                                        <SearchIcon sx={{
+                                            color: '#00f0ff'
+                                        }} />
+                                    )}
+                                </>
+                            ),
+                        }}
+                        sx={{
+                            '& .MuiOutlinedInput-root': {
+                                borderColor: '#00f0ff',
+                                boxShadow: '0 0 3px rgba(0, 240, 255, 0.2)',
+                                '&:hover': {
+                                    boxShadow: '0 0 5px rgba(55, 185, 255, 0.54), 0 0 8px rgba(9, 169, 255, 0.42)',
+                                },
+                                '&.Mui-focused': {
+                                    borderColor: '#00f0ff',
+                                    boxShadow: '0 0 4px rgba(55, 185, 255, 0.66), 0 0 6px rgba(9, 169, 255, 0.6), 0 0 8px rgba(183, 128, 255, 0.57)',
+                                },
+                                '& .MuiOutlinedInput-notchedOutline': {
+                                    borderColor: '#00f0ff',
+                                },
+                            },
+                            '& .MuiOutlinedInput-input': {
+                                color: '#00f0ff',
+                                fontWeight: 600,
+                                fontFamily: '"Kalam", cursive',
+                            }
                         }}
                     />
                     {searchResults.length > 0 && (
@@ -89,7 +147,7 @@ const Navbar = () => {
                                 backgroundColor: 'white',
                                 zIndex: 10,
                                 color: 'black',
-                                border: '1px solid #ddd',
+                                border: '1px solid #121212',
                                 borderRadius: '4px',
                             }}
                         >

@@ -8,7 +8,7 @@ const db = async () => {
       connection = await mysql.createConnection({
         host: "localhost",
         user: "root",
-        password: "./Baymax2024",
+        password: "252410",
         database: "otakuscope",
       });
     }
@@ -31,5 +31,5 @@ const checkConnection = async () => {
       console.error("Database connection is not active:", err);
     }
   };
-  
+
 module.exports = { db, checkConnection };

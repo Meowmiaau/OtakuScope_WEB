@@ -28,6 +28,7 @@ const App = () => (
         <Router>
             <Routes>
                 <Route path="/" element={<GetStarted />} />
+                <Route path="/anime/:id" element={<AnimeDetails />} />
                 <Route path="/:id" element={<AnimeDetails />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />

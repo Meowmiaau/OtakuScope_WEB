@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+      "moduleResolution": "node",
+      "target": "ES6",
+      "types": ["node"],
+      "allowJs": true
+    },
+    "include": [
+      "backend/**/*.js"
+    ]
+  }

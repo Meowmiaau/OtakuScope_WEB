@@ -9,6 +9,7 @@ const Navbar = () => {
     const [searchResults, setSearchResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const username = localStorage.getItem("username");
 
     const navbarRef = useRef(null);
 
@@ -82,7 +83,7 @@ const Navbar = () => {
             <Toolbar>
             <Box sx={{ flexGrow: 1 }}>
                 <img
-                    src="\OtakuLOGO2.png"  // Update the path to where your image is stored
+                    src="\OtakuLOGO.png"  // Update the path to where your image is stored
                     alt="OtakuScope"
                     style={{ height: '48px' }} // Adjust height as necessary
                 />
@@ -167,22 +168,64 @@ const Navbar = () => {
                     )}
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Button color="inherit" component={Link} to="/home" sx={{ marginRight: 2 }}>
+                    <Button color="inherit" component={Link} to="/home" sx={{
+                        marginRight: 2,
+                        fontFamily: "'Quicksand', sans-serif",
+                        fontWeight: 600,
+                        transition: "color 0.15s ease-in-out",
+                        '&:hover': { color: '#bf00ff' }
+                    }}>
                         Home
                     </Button>
-                    <Button color="inherit" component={Link} to="/myanime" sx={{ marginRight: 2 }}>
+                    <Button color="inherit" component={Link} to="/myanime" sx={{
+                        marginRight: 2,
+                        fontFamily: "'Quicksand', sans-serif",
+                        fontWeight: 600,
+                        transition: "color 0.15s ease-in-out",
+                        '&:hover': { color: '#bf00ff' }
+                    }}>
                         MyAnime
                     </Button>
-                    <Button color="inherit" component={Link} to="/lists" sx={{ marginRight: 2 }}>
+                    <Button color="inherit" component={Link} to="/lists" sx={{
+                        marginRight: 2,
+                        fontFamily: "'Quicksand', sans-serif",
+                        fontWeight: 600,
+                        transition: "color 0.15s ease-in-out",
+                        '&:hover': { color: '#bf00ff' }
+                    }}>
                         Lists
                     </Button>
-                    <Button color="inherit" component={Link} to="/profile" sx={{ marginRight: 2 }}>
+                    <Button color="inherit" component={Link} to={`/profile/${username}`} sx={{
+                        marginRight: 2,
+                        fontFamily: "'Quicksand', sans-serif",
+                        fontWeight: 600,
+                        transition: "color 0.15s ease-in-out",
+                        '&:hover': { color: '#bf00ff' }
+                    }}>
                         Profile
                     </Button>
-                    <Button color="inherit" component={Link} to="/forum" sx={{ marginRight: 2 }}>
+                    <Button color="inherit" component={Link} to="/forum" sx={{
+                        marginRight: 2,
+                        fontFamily: "'Quicksand', sans-serif",
+                        fontWeight: 600,
+                        transition: "color 0.15s ease-in-out",
+                        '&:hover': { color: '#bf00ff' }
+                    }}>
                         Forum
                     </Button>
-                    <Button color="secondary" onClick={handleLogout} variant="outlined" sx={{ marginLeft: 2 }}>
+                    <Button color="secondary" onClick={handleLogout} variant="outlined" sx={{
+                        marginLeft: 2,
+                        fontFamily: "'Quicksand', sans-serif",
+                        fontWeight: 700,
+                        color: '#bf00ff',
+                        borderColor: '#bf00ff',
+                        '&:hover': {
+                            backgroundColor: 'rgba(191, 0, 255, 0.1)',
+                            borderColor: 'rgba(255, 0, 255)',
+                            color: '#bf00ff',
+                            boxShadow: "0 0 4px rgba(193, 5, 255, 0.6), 0 0 8px rgba(255, 0, 255, 0.45)"
+                        }
+                    }}>
                         Logout
                     </Button>
                 </Box>

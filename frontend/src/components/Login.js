@@ -13,9 +13,11 @@ const Login = () => {
         try {
             const res = await axios.post('http://localhost:5000/api/auth/login', formData);
             const token = res.data.token;
+            const username = res.data.username;
 
             // Save token to localStorage
             localStorage.setItem('token', token);
+            localStorage.setItem('username', username); // Saving the username
 
             // Clear error and redirect to the homepage
             setError('');

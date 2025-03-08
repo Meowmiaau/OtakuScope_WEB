@@ -15,7 +15,7 @@ const theme = createTheme({
     palette: {
         mode: 'dark', // Dark mode
         primary: {
-            main: '#8B5DFF', // Purple
+            main: '#00f0ff', // Purple
         },
         background: {
             default: '#121212', // Dark background color
@@ -35,7 +35,7 @@ const App = () => (
                 <Route path="/home" element={<Home />} />
                 <Route path="/myanime" element={<MyAnime />} />
                 <Route path="/lists" element={<Lists />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile/:username" element={<Profile />} />
                 <Route path="/forum" element={<Forum />} />
             </Routes>
         </Router>

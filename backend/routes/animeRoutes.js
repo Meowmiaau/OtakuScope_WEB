@@ -9,4 +9,6 @@ router.get('/:id', verifyToken, getAnimeDetails);
 // Route to add or update anime interaction (POST /api/anime/:id)
 router.post('/:id', verifyToken, saveOrUpdateAnimeInteraction);
 
+
+
 module.exports = router;

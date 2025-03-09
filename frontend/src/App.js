@@ -9,7 +9,7 @@ import MyAnime from './components/MyAnime';
 import Lists from './components/Lists';
 import Profile from './components/Profile';
 import Forum from './components/Forum';
-import AnimeDetails from './components/AnimeDetails';
+import AnimeDetails from './pages/AnimeDetails';
 
 const theme = createTheme({
     palette: {

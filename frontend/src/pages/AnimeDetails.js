@@ -206,9 +206,50 @@ const AnimeDetails = () => {
                     title { romaji english native }
                     description
                     episodes
+                    duration
+                    status
                     startDate { year month day }
+                    season
+                    averageScore
+                    meanScore
+                    popularity
+                    favourites
+                    studios { nodes { name } }
                     coverImage { large }
                     bannerImage
+                    relations {
+                        edges {
+                          node {
+                              id
+                             title { romaji }
+                             type
+                             format
+                             coverImage { large }
+                                 }
+                     relationType }}
+                   characters {
+                         edges {
+                            node {
+                               id
+                               name { full }
+                               image { large }
+                                  }
+                            role
+                            voiceActors {
+                                id
+                                name { full }
+                            image{large}
+                            language
+                                  }}}
+                   staff {
+                         edges {
+                         node { 
+                            id
+                            name { full }
+                            image { large }
+                              }
+                         role
+                         }}
                 }
             }
           `,
@@ -351,6 +392,142 @@ const AnimeDetails = () => {
       ) : (
         <Typography variant="h5">No Anime Data Available</Typography>
       )}
+        {/* Navigation Bar */}
+        <div className="anime-navigation">
+            <a href="#">Overview</a>
+            <a href="#">Characters</a>
+            <a href="#">Staff</a>
+            <a href="#">Stats</a>
+            <a href="#">Social</a>
+          </div>
+
+        {/* Parent Container */}
+        <div className="parent-container">
+
+             {/* Details Container */}
+             <div className="details-container">
+                  {/* Details Section */}
+                  <div className="details-section">
+                    <div className="details-grid">
+                      <div>
+                        <h5>Details</h5>
+                        <p><strong>Format:</strong> TV</p>
+                        <p><strong>Episodes:</strong> {anime.episodes || "N/A"}</p>
+                        <p><strong>Episode Duration:</strong> {anime.duration || "N/A"} mins</p>
+                        <p><strong>Status:</strong> {anime.status || "N/A"}</p>
+                        <p><strong>Start Date:</strong> {anime.startDate?.year || "N/A"}-{anime.startDate?.month || "N/A"}-{anime.startDate?.day || "N/A"}</p>
+                        <p><strong>Season:</strong> {anime.season || "N/A"} {anime.startDate?.year || ""}</p>
+                        <p><strong>Average Score:</strong> {anime.averageScore || "N/A"}%</p>
+                        <p><strong>Mean Score:</strong> {anime.meanScore || "N/A"}%</p>
+                        <p><strong>Popularity:</strong> {anime.popularity || "N/A"}</p>
+                        <p><strong>Favorites:</strong> {anime.favourites || "N/A"}</p>
+                        <p><strong>Studios:</strong> {anime.studios?.nodes?.map(studio => studio.name).join(", ") || "N/A"}</p>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div className="relations-container">
+                     
+                    {/* Relations Section */}
+            <div className="relations-section">
+              <h3>Relations</h3>
+              <div className="relations-row">
+                {anime.relations?.edges?.map((relation) => (
+                  <div key={relation.node.id} className="relation-item">
+                    {relation.node.coverImage?.large ? (
+                      <img
+                        src={relation.node.coverImage.large}
+                        alt={relation.node.title.romaji}
+                        className="relation-image"
+                      />
+                    ) : (
+                      <div className="no-image">No Image Available</div>
+                    )}
+                    <div className="relation-info">
+                      <p><strong>{relation.relationType}:</strong></p>
+                      <p>{relation.node.title.romaji} ({relation.node.format})</p>
+                    </div>
+                  </div>
+                ))}
+    </div>
+
+              {/* Characters Section */}
+
+              <h3>Characters</h3>
+              <div className="characters-grid">
+                {Object.entries(
+                  anime.characters?.edges?.reduce((acc, character) => {
+                    const characterName = character.node.name.full;
+                    if (!acc[characterName]) {
+                      acc[characterName] = {
+                        role: character.role,
+                        image: character.node.image.large,
+                        voiceActors: [],
+                      };
+                    }
+                    character.voiceActors?.forEach((voiceActor) => {
+                      acc[characterName].voiceActors.push(`${voiceActor.name.full} (${voiceActor.language})`);
+                    });
+                    return acc;
+                  }, {})
+                )
+                .slice(0, 7) // Limit to top 6 characters
+                .map(([characterName, data]) => (
+                  <div key={characterName} className="character-item">
+                    {/* Character Image */}
+                    <div className="character-image-container">
+                      <img src={data.image} alt={characterName} className="character-image" />
+                    </div>
+
+                    {/* Character Info */}
+                    <div className="character-info">
+                      <p className="character-name">{characterName}</p>
+                      <p className="character-role">{data.role}</p>
+                      
+                  
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+                {/* Staff Section */}
+
+            <h3>Staff</h3>
+            <div className="staff-grid">
+              {anime.staff?.edges?.slice(0, 6).map((staff) => (
+                <div key={staff.node.id} className="staff-item">
+                  {/* Staff Image */}
+                  <div className="staff-image-container">
+                    {staff.node.image?.large ? (
+                      <img
+                        src={staff.node.image.large}
+                        alt={staff.node.name.full}
+                        className="staff-image"
+                      />
+                    ) : (
+                      <div className="no-image">No Image Available</div>
+                    )}
+                  </div>
+
+                  {/* Staff Info */}
+                  <div className="staff-info">
+                    <p className="staff-name">{staff.node.name.full}</p>
+                    <p className="staff-role">{staff.role}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+
+                         </div>
+ 
+            </div>
+
+
+           </div>
+         
+
+
     </Box>
   );
 };

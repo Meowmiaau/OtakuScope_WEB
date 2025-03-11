@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const {db} = require('../config/db'); // Import the DB connection function
+const { getDBConnection} = require('../config/db'); // Import the DB connection function
 const express = require('express');
 
 // Generate JWT
@@ -16,7 +16,7 @@ const signup = async (req, res) => {
     const { username, email, password } = req.body;
 
     try {
-        const connection = await db();
+        const connection = await getDBConnection();
         if (!username || !email || !password || password.length < 8) {
             return res.status(400).json({ error: 'Invalid input or password too short' });
         }
@@ -65,7 +65,7 @@ const login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const connection = await db();
+        const connection = await getDBConnection();
         if (!email || !password) {
             return res.status(400).json({ error: 'Email and password are required' });
         }

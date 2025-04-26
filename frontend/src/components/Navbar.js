@@ -223,7 +223,7 @@ const Navbar = () => {
                             backgroundColor: 'rgba(191, 0, 255, 0.1)',
                             borderColor: 'rgba(255, 0, 255)',
                             color: '#bf00ff',
-                            boxShadow: "0 0 4px rgba(193, 5, 255, 0.6), 0 0 8px rgba(255, 0, 255, 0.45)"
+                            boxShadow: "0 0 4px rgba(255, 0, 0, 0.6), 0 0 8px rgba(255, 0, 0, 0.45)"
                         }
                     }}>
                         Logout

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
+import "../styles/Home.css";
 import { 
   Card, 
   CardContent, 
@@ -129,24 +130,9 @@ const Home = () => {
   };
 
   const renderSectionHeading = (title, icon) => (
-    <Box 
-      display="flex" 
-      alignItems="center" 
-      mb={3} 
-      mt={6} 
-      borderLeft="4px solid #6200ea"
-      pl={2}
-    >
+    <Box className="section-heading">
       {icon}
-      <Typography
-        variant="h5"
-        sx={{
-          fontWeight: "bold",
-          fontFamily: '"Roboto", sans-serif',
-          color: "#fff",
-          ml: 1
-        }}
-      >
+      <Typography variant="h5" className="section-title">
         {title}
       </Typography>
     </Box>
@@ -157,7 +143,7 @@ const Home = () => {
       {isLoading
         ? Array.from(new Array(6)).map((_, index) => (
             <Grid item xs={12} sm={6} md={4} lg={2} key={index}>
-              <Card sx={{ height: "100%", bgcolor: "#1e1e1e" }}>
+              <Card className="skeleton-card">
                 <Skeleton variant="rectangular" height={200} animation="wave" />
                 <CardContent>
                   <Skeleton variant="text" width="80%" />
@@ -170,71 +156,41 @@ const Home = () => {
             <Grid item xs={12} sm={6} md={4} lg={2} key={item.id}>
               <Card
                 onClick={() => handleCardClick(item.id)}
-                sx={{
-                  height: "100%",
-                  bgcolor: "#1e1e1e",
-                  color: "#fff",
-                  borderRadius: "8px",
-                  transition: "transform 0.3s, box-shadow 0.3s",
-                  cursor: "pointer",
-                  "&:hover": {
-                    transform: "translateY(-5px)",
-                    boxShadow: "0 10px 20px rgba(0,0,0,0.5)",
-                  },
-                  display: "flex",
-                  flexDirection: "column",
-                }}
+                className="anime-card"
               >
                 <CardMedia
                   component="img"
                   height="240"
                   image={item.coverImage.large}
                   alt={item.title.english || item.title.romaji}
-                  sx={{ objectFit: "cover" }}
+                  className="card-media"
                 />
-                <CardContent sx={{ flexGrow: 1, p: 2 }}>
+                <CardContent  className="card-content">
                   <Typography
                     variant="subtitle1"
                     component="div"
-                    sx={{
-                      fontWeight: 700,
-                      color: "#d3d3ff",
-                      fontFamily: "Quicksand, sans-serif",
-                      fontSize: "16px",
-                      mb: 1,
-                      height: "48px",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      display: "-webkit-box",
-                      WebkitLineClamp: 2,
-                      WebkitBoxOrient: "vertical",
-                    }}
+                    className="anime-title"
                   >
                     {item.title.english || item.title.romaji}
                   </Typography>
                   
                   {item.genres && item.genres.length > 0 && (
-                    <Box mb={1} sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                    <Box className="genre-container">
                       {item.genres.slice(0, 2).map((genre) => (
                         <Chip 
                           key={genre} 
                           label={genre} 
                           size="small"
-                          sx={{ 
-                            bgcolor: "rgba(98, 0, 234, 0.2)", 
-                            color: "#a387ff",
-                            fontSize: "10px",
-                            height: "24px"
-                          }} 
+                          className="genre-chip"
                         />
                       ))}
                     </Box>
                   )}
                   
                   {item.averageScore && (
-                    <Box display="flex" alignItems="center" mb={1}>
-                      <StarIcon sx={{ color: "#ffc107", fontSize: "16px", mr: 0.5 }} />
-                      <Typography variant="body2" sx={{ color: "#ffc107" }}>
+                    <Box className="score-container">
+                      <StarIcon className="star-icon" />
+                      <Typography variant="body2" className="score-text">
                         {item.averageScore / 10}/10
                       </Typography>
                     </Box>
@@ -242,15 +198,7 @@ const Home = () => {
                   
                   <Typography
                     variant="body2"
-                    sx={{
-                      color: "#aaa",
-                      fontSize: "12px",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      display: "-webkit-box",
-                      WebkitLineClamp: 3,
-                      WebkitBoxOrient: "vertical",
-                    }}
+                    className="anime-description"
                   >
                     {item.description?.replace(/<[^>]*>/g, "") || "No description available."}
                   </Typography>
@@ -262,22 +210,16 @@ const Home = () => {
   );
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        bgcolor: "#121212",
-        color: "#fff",
-      }}
-    >
+    <Box className="home-container">
       <Navbar />
-      <Container maxWidth="xl" sx={{ pt: 8, pb: 8 }}>
-        {renderSectionHeading("Trending Now", <TrendingUpIcon sx={{ color: "#6200ea" }} />)}
+      <Container maxWidth="xl" className="content-container">
+        {renderSectionHeading("Trending Now", <TrendingUpIcon className="trending-icon"  />)}
         {renderCards(trendingNow, loading)}
 
-        {renderSectionHeading("All-Time Favorites", <FavoriteIcon sx={{ color: "#6200ea" }} />)}
+        {renderSectionHeading("All-Time Favorites", <FavoriteIcon className="favorites-icon"  />)}
         {renderCards(allTimeFavorites, loading)}
 
-        {renderSectionHeading("Popular This Season", <StarIcon sx={{ color: "#6200ea" }} />)}
+        {renderSectionHeading("Popular This Season", <StarIcon className="popular-icon"  />)}
         {renderCards(popularThisSeason, loading)}
       </Container>
     </Box>

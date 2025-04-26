@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const animeRoutes = require('./routes/animeRoutes');
-require('dotenv').config();
+const listRoutes = require('./routes/listRoutes');
 const { checkConnection } = require('./config/db');
 const verifyToken = require('./middleware/authMiddleware');
 
@@ -15,7 +15,7 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/anime', verifyToken, animeRoutes); // Protect anime routes with the verifyToken middleware
-
+app.use('/api/lists', listRoutes); // Protect list routes with the verifyToken middleware
 const PORT = process.env.PORT || 5000;
 
 // Start the server

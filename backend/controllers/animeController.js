@@ -28,7 +28,6 @@ const getAnimeDetails = async (req, res) => {
 };
 
 // Save or update anime interaction
-// Save or update anime interaction
 const saveOrUpdateAnimeInteraction = async (req, res) => {
     try {
         const userId = req.userId;

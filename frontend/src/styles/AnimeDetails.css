@@ -376,3 +376,14 @@ color: #777;
 
 
 
+.modal-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background: rgb(149, 64, 247);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,419 @@
+.profileContainer {
+    background-color: #191b24ee;
+    color: #fff;
+    font-family: '"Quicksand", sans-serif';
+    min-height: 111vh;
+    padding: 21px;
+    max-height: 300vh;
+    overflow: visible;
+  }
+  
+  .profileHeader {
+    position: relative;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .banner {
+    position: relative;
+    background-color: #282828;
+    height: 250px;
+    width: 100%;
+    border-radius: 1px;
+  }
+  
+  .editingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(216, 201, 231, 0.54);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+  }
+  
+  .editingTab {
+    background-color: #222;
+    padding: 15px;
+    border-radius: 15px;
+    width: 450px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    border: 1px solid #cfdfe6;
+    box-shadow: 0 0 4.5px #cfdfe6, 0 0 6.3px #cfdfe6;
+  }
+  
+  .storesTab {
+    background-color: #222;
+    padding: 15px;
+    border-radius: 15px;
+    width: 450px;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    border: 1px solid #cfdfe6;
+    box-shadow: 0 0 4.5px #cfdfe6, 0 0 6.3px #cfdfe6;
+  }
+  
+  
+  
+  .closeButtonStores {
+    background: transparent;
+    border: none;
+    color: #00f0ff;
+    font-size: 24px;
+    padding: 9px 9px;
+    cursor: pointer;
+    position: absolute;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    top: 5px;
+    right: 12px;
+  }
+  
+  .backeditBtn {
+    background: rgb(160, 199, 209);
+    border: none;
+    color: #222;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 1px;
+    margin: 5px 10.5px;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 0 4px rgb(160, 199, 209), 0 0 8px rgb(160, 199, 209);
+    letter-spacing: 0.45px;
+  }
+  
+  .profileTabShadow {
+   
+    
+   
+    margin-top: -29px;
+  }
+  
+  
+  .storeButtonAvt {
+    background: #7d9bdb;
+    border: none;
+    color: whitesmoke;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 2px;
+    margin: 20px 15px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.45px;
+    width: 130px;
+    margin-top: -15px;
+    margin-left: 13px;
+  }
+  
+  .storeButtonBnr {
+    background: #7d9bdb;
+    border: none;
+    color: whitesmoke;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 2px;
+    margin: 20px 15px;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: -15px;
+    letter-spacing: 0.45px;
+    width: 130px;
+    
+  }
+  
+  .storeGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    margin-top: 21px;
+  }
+  
+  .storeGridBanner {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    margin-top: 21px;
+  }
+  
+  .avatarContainer {
+    position: relative;
+    text-align: center;
+    margin-top: -110px;
+  }
+  
+  .avatar {
+    width: 136px;
+    height: 136px;
+    border-radius: 50%;
+    border: 6.3px solid #c799c7;
+    box-shadow: 0 0 4px #dfbdeb, 0 0 10px #dfbdeb, 0 0 18px #dfbdeb;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .ProfileEditing {
+    font-family: '"Cinzel", serif';
+    font-size: 30.2px;
+    margin-top: 12px;
+    color: #84d5e9;
+  }
+  .closeButtonProfileEdit {
+    background: transparent;
+    border: none;
+    color: #84d5e9;
+    font-size: 24px;
+    padding: 9px 9px;
+    cursor: pointer;
+    position: absolute;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    top: 5px;
+    right: 12px;
+  }
+  .avatarUpload {
+    display: block;
+    margin-top: 8px;
+    color: #fff;
+    font-size: 5px;
+    cursor: pointer;
+  }
+  
+  .upAvatarBtn {
+    background-color: whitesmoke;
+    color: #222;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 1px;
+    margin: 15px 14px;
+    font-size: 15px;
+    font-weight: 560;
+    
+  }
+  .removeIcon1 {
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    z-index: 2;
+    margin-left: -50px;
+    margin-top: -10px;
+  }
+  .upBannerBtn {
+    background-color: whitesmoke;
+    color: #222;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 1px;
+    margin: 15px 14px;
+    font-size: 15px;
+    font-weight: 560;
+  }
+
+  .removeIcon2 {
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    z-index: 2;
+    margin-left: -px;
+    margin-top: -10px;
+  }
+
+  .editProfile {
+    background: #7d9bdb;
+    border: none;
+    color: whitesmoke;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 2px;
+    margin: 20px 15px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.45px;
+    width: 130px;
+    margin-top: 20px;
+    
+  }
+  .editProfileGroup {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5px;
+    margin-top: -20.4px;
+  }
+  
+  .editProfileIcon {
+    width: 52px;
+    height: 52px;
+    cursor: pointer;
+    z-index: 2;
+    margin-left: -53px;
+  }
+  
+  .dropdownItem {
+    padding: 3px;
+    cursor: pointer;
+  }
+  
+  .username {
+    font-family: '"Cinzel", serif';
+    font-size: 33.2px;
+    margin-top: 12px;
+  }
+  
+  .usernameHighLight1 {
+    color: #7fb0d1;
+    -webkit-text-stroke: 0.54px rgb(58, 167, 240);
+    font-weight: 500;
+    text-shadow: 0 0 2px rgba(46, 57, 63, 0.66), 0 0 4px rgba(102, 204, 255, 0.6), 0 0 6px rgba(102, 204, 255, 0.54);
+  }
+  
+  .bar {
+    border: none;
+    height: 1.5px;
+    background-color: rgba(20, 186, 219, 0.88);
+    box-shadow: 0 0 4.5px rgba(0, 191, 255, 0.68), 0 0 6.3px rgba(18, 176, 229, 0.87);
+    position: relative;
+    margin-top: 15px;
+    margin-bottom: 27px;
+  }
+  
+  .profileNav {
+    display: flex;
+    justify-content: center;
+    gap: 16.5px;
+    margin-bottom: 27px;
+    margin-top: 21px;
+  }
+  
+  .navButton {
+    background-color: #dcdcdc;
+    color: #121212;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: '"Quicksand", sans-serif';
+    font-weight: 800;
+    transition: 0.3s;
+    letter-spacing: 0.21px;
+    -webkit-text-stroke: 0.27px #121212;
+  }
+  
+  .activeTab {
+    background-color: #4dddf0;
+    color: #121212;
+    -webkit-text-stroke: 0.27px #121212;
+    box-shadow: 0 0 2px rgba(24, 43, 49, 0.9), 0 0 4px rgba(17, 71, 88, 0.84), 0 0 8px rgba(17, 56, 70, 0.72), 0 0 12px rgba(0, 163, 217, 0.69);
+  }
+  
+  .profileContent {
+    padding: 20px;
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    min-height: 540px;
+  }
+  
+  .overview {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .animeColumn {
+    width: 45%;
+    background-color: #282828;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .actionsColumn {
+    width: 45%;
+    background-color: #282828;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .logoutButton {
+    position: absolute;
+    top: 7.5px;
+    right: 7.5px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Quicksand', sans-serif;
+    color: #ff0000;
+    background-color: #272121;
+    border: 1.8px solid #f70303;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    letter-spacing: 0.90px;
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .logoutButton:hover {
+    background-color: #ff0000;
+    color: #222;
+  }
+  
+  .logoutIcon {
+    font-size: 1.2rem;
+  }
+.profileButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .welcomeMessage {
+    text-align: left;
+    padding-left: 100px;
+    margin-left: -90px;
+  }
+  
+  .removeButtonGroup {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5px;
+    margin-top: -1.5px;
+  }
+  
+  .bannerGroup {
+    margin-top: -18px;
+    margin-left: 51px;
+  }
+  
+  
+ 
+
+  /* New classes for elements that had inline styles */
+.avatarVideo {
+    width: 123px;
+    height: 123px;
+  }
+  
+  .hiddenFileInput {
+    display: none;
+  }
+  
+  .profileButtonsWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  
+  
+  

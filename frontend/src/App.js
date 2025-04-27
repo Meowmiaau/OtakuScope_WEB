@@ -1,16 +1,16 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import React from 'react';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import Forum from './components/Forum';
 import GetStarted from './components/GetStarted';
 import Login from './components/Login';
-import Signup from './components/Signup';
-import Home from './components/Home';
 import MyAnime from './components/MyAnime';
-import Lists from './pages/Lists';
 import Profile from './components/Profile';
-import Forum from './components/Forum';
+import Signup from './components/Signup';
 import AnimeDetails from './pages/AnimeDetails';
-
+import Home from './pages/Home';
+import ListDetails from './pages/ListDetails';
+import Lists from './pages/Lists';
 const theme = createTheme({
     palette: {
         mode: 'dark', // Dark mode
@@ -35,6 +35,7 @@ const App = () => (
                 <Route path="/home" element={<Home />} />
                 <Route path="/myanime" element={<MyAnime />} />
                 <Route path="/lists" element={<Lists />} />
+                <Route path="/lists/:listId" element={<ListDetails />} />
                 <Route path="/profile/:username" element={<Profile />} />
                 <Route path="/forum" element={<Forum />} />
             </Routes>

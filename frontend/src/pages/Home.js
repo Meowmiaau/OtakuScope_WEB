@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
-import "../styles/Home.css";
-import { 
-  Card, 
-  CardContent, 
-  CardMedia, 
-  Typography, 
-  Grid, 
-  Container, 
-  Box,
-  Skeleton,
-  Chip
-} from "@mui/material";
-import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import StarIcon from "@mui/icons-material/Star";
+import TrendingUpIcon from "@mui/icons-material/TrendingUp";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Chip,
+  Container,
+  Grid,
+  Skeleton,
+  Typography
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import "../styles/Home.css";
 
 const Home = () => {
   const navigate = useNavigate();

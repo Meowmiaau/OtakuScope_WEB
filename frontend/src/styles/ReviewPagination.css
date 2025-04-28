@@ -1,0 +1,33 @@
+/* frontend/src/styles/ReviewPagination.css */
+.review-pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+    gap: 16px;
+  }
+
+  .pagination-button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 500;
+    text-transform: none;
+    transition: all 0.3s ease;
+    background-color: rgba(0, 167, 245, 0.312);
+    border-color: rgb(155, 165, 170) !important;
+    color: rgb(98, 106, 110) !important;
+  }
+
+  .pagination-button:hover {
+    background-color: rgba(0, 167, 245, 0.08);
+    border-color: rgb(0, 167, 245) !important;
+    color: rgb(0, 167, 245) !important;
+  }
+
+  .pagination-button:disabled {
+    opacity: 0.15;
+    cursor: not-allowed;
+  }
+
+  .pagination-button:first-of-type {
+    margin-right: 12px;
+  }

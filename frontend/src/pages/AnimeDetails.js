@@ -16,7 +16,7 @@ import {
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import "./../styles/AnimeDetails.css";
-// import ReviewSection from "../components/ReviewSection";
+import ReviewSection from "../components/ReviewSection";
 import AddToListModal from "../components/AddToListModal";
 const backendPath = "http://localhost:5000";
 
@@ -473,7 +473,7 @@ const AnimeDetails = () => {
                 </p>
               </div>
             </div>
-            <h5 className="tags-section h5">Tags</h5> 
+            <h5 className="tags-section h5">Tags</h5>
                         {/* Tags Section */}
                         <div className="tags-grid">
                          {anime.tags?.slice(0, 19).map((tag) => (
@@ -481,7 +481,7 @@ const AnimeDetails = () => {
                           <span className="tag-name">{tag.name}</span>
                             <span className="tag-percentage">{tag.rank}%</span>
                        </div>
-                        ))} 
+                        ))}
                         </div>
           </div>
         </div>
@@ -537,14 +537,14 @@ const AnimeDetails = () => {
               )
                 .slice(0, 7) // Limit to top 6 characters
                 .map(([characterName, data]) => (
-                  <div key={characterName} className="character-item" style={{backgroundColor: "#585454", marginLeft:"-17px", borderRadius:"5px", width:"180px",height:"250px", marginRight:"-25px", padding:"5px"}}> 
+                  <div key={characterName} className="character-item" style={{backgroundColor: "#585454", marginLeft:"-17px", borderRadius:"5px", width:"180px",height:"250px", marginRight:"-25px", padding:"5px"}}>
                     <div className="character-image-container">
                       <img
                         src={data.image}
                         alt={characterName}
                         className="character-image"
                       />
-                      
+
                     </div>
                     <div>
                     <p className="character-name">{characterName}</p>
@@ -552,7 +552,7 @@ const AnimeDetails = () => {
                     </div>
 
                     {/* Character Info */}
-                    
+
                   </div>
                 ))}
             </div>
@@ -587,9 +587,12 @@ const AnimeDetails = () => {
           </div>
         </div>
       </div>
-      {/* <div className="reviews-section-wrapper">
+      <div className="reviews-section-wrapper">
         <ReviewSection animeId={id} />
-      </div> */}
+      </div>
+      <div className="footer">
+        <p>© 2023 Anime Reviews. All rights reserved.</p>
+      </div>
     </Box>
   );
 };

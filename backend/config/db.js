@@ -1,3 +1,4 @@
+// backend/config/db.js
 const mysql = require('mysql2/promise');
 
 let connection;
@@ -11,6 +12,7 @@ const getDBConnection = async () => {
         password: "./Baymax2024",
         database: "otakuscope",
       });
+       //  we're using single connection
     }
     return connection;
   } catch (err) {
@@ -27,6 +29,14 @@ const checkConnection = async () => {
     console.log("Database connection is active.");
   } catch (err) {
     console.error("Database connection is not active:", err);
+  }
+};
+
+// Add this new function
+const endConnection = async () => {
+  if (connection) {
+    await connection.end();
+    connection = null;
   }
 };
 

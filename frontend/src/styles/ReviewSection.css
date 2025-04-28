@@ -1,0 +1,92 @@
+/* frontend/src/components/ReviewSection.css */
+.review-section {
+    width: 94.4%;
+    margin: 60px 0;
+    padding: 42px 39px;
+    background-color: rgba(211, 234, 236, 0.65);
+    border-radius: 12px;
+  }
+
+  .reviews {
+    font-weight: 900;
+  }
+
+  /* Title-input-styles */
+  .review-title-input input {
+    color: #222 !important;
+  }
+
+  .review-title-input label {
+    color: #666 !important;
+  }
+
+  .review-title-input label.Mui-focused {
+    color: #222 !important;
+  }
+
+  .review-title-input .MuiOutlinedInput-root {
+    color: #222 !important;
+  }
+
+  .review-title-input .MuiOutlinedInput-notchedOutline {
+    border-color: #ccc !important;
+  }
+
+  .review-title-input:hover .MuiOutlinedInput-notchedOutline {
+    border-color: #999 !important;
+  }
+
+  .review-title-input.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #222 !important;
+  }
+
+  .review-user-section {
+    margin-bottom: 10px;
+    margin-top: 24px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+
+  .review-content {
+    line-height: 1.6;
+    color: #444;
+    margin: 15px 0;
+    white-space: pre-line;
+  }
+
+  .review-user-details {
+    position: relative;
+  }
+
+  .review-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: -30px;
+    margin-right: 6px
+  }
+
+  .review-edit-form {
+    margin-top: 20px;
+  }
+
+  .review-other-section {
+    margin-top: 42px;
+  }
+
+  .explore-reviews {
+    font-weight: 900;
+    margin-bottom: 18px !important;
+  }
+
+  .review-pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+  }
+
+  .review-avatar {
+    border: 2px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }

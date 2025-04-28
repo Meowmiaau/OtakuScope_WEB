@@ -537,7 +537,7 @@ const AnimeDetails = () => {
               )
                 .slice(0, 7) // Limit to top 6 characters
                 .map(([characterName, data]) => (
-                  <div key={characterName} className="character-item" style={{backgroundColor: "#4b4747", marginRight:"10px", borderRadius:"5px"}}> 
+                  <div key={characterName} className="character-item" style={{backgroundColor: "#585454", marginLeft:"-17px", borderRadius:"5px", width:"180px",height:"250px", marginRight:"-25px", padding:"5px"}}> 
                     <div className="character-image-container">
                       <img
                         src={data.image}

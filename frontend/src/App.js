@@ -12,6 +12,7 @@ import Home from './pages/Home';
 import ListDetails from './pages/ListDetails';
 import Lists from './pages/Lists';
 import Character from './components/Character';
+import Staff from './components/Staff';
 const theme = createTheme({
     palette: {
         mode: 'dark', // Dark mode
@@ -31,6 +32,7 @@ const App = () => (
                 <Route path="/" element={<GetStarted />} />
                 <Route path="/anime/:id" element={<AnimeDetails />} />
                 <Route path="/anime/:id/character" element={<Character />} />
+                <Route path="/anime/:id/staff" element={<Staff />} />
                 <Route path="/:id" element={<AnimeDetails />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />

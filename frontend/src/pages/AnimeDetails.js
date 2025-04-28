@@ -416,7 +416,7 @@ const AnimeDetails = () => {
       {/* Navigation Bar */}
       <div className="anime-navigation">
       <Link to={`/anime/${id}`}>Overview</Link>
-            <Link to={`/anime/${id}/characters`}>Characters</Link>
+            <Link to={`/anime/${id}/character`}>Characters</Link>
             <Link to={`/anime/${id}/staff`}>Staff</Link>
             <Link to={`/anime/${id}/status`}>Status</Link>
             <Link to={`/home`}>Home</Link>
@@ -537,21 +537,22 @@ const AnimeDetails = () => {
               )
                 .slice(0, 7) // Limit to top 6 characters
                 .map(([characterName, data]) => (
-                  <div key={characterName} className="character-item">
-                    {/* Character Image */}
+                  <div key={characterName} className="character-item" style={{backgroundColor: "#4b4747", marginRight:"10px", borderRadius:"5px"}}> 
                     <div className="character-image-container">
                       <img
                         src={data.image}
                         alt={characterName}
                         className="character-image"
                       />
+                      
+                    </div>
+                    <div>
+                    <p className="character-name">{characterName}</p>
+                    <p className="character-role">{data.role}</p>
                     </div>
 
                     {/* Character Info */}
-                    <div className="character-info">
-                      <p className="character-name">{characterName}</p>
-                      <p className="character-role">{data.role}</p>
-                    </div>
+                    
                   </div>
                 ))}
             </div>

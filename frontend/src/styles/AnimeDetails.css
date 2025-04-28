@@ -271,6 +271,7 @@ border-radius: 10px;
 box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 margin-top: 20px;
 margin-bottom: 30px;
+margin-left: 30px;
 }
 
 .characters-section h5 {
@@ -278,12 +279,14 @@ font-size: 20px;
 margin-bottom: 15px;
 color: #333;
 font-weight: bold;
+margin-left: 30px;
 }
 
 .characters-grid {
 display: grid;
 grid-template-columns: repeat(7, 1fr); /* 3 columns for each row */
-gap: 20px; /* Spacing between items */
+gap: px; /* Spacing between items */
+margin-left: 5px;
 }
 
 .character-item {
@@ -298,7 +301,7 @@ gap: 20px; /* Spacing between items */
   justify-content: center;
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  
+  margin-left: 50px;
 }
 }
 
@@ -308,29 +311,31 @@ box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
 }
 
 .character-image {
-width: 130px;
+width: 120px;
 height: 120px;
 border-radius: 5%;
 margin-bottom: 10px;
-margin-left: 25px;
+margin-left: 15px;
 margin-top: 10px;
 }
 
-.character-info {
-font-size: 14px;
-color: #eee8e8;
-margin-left: 30px;
-
+.character-image-container {
+width: 150px;
+height: 140px;
+margin-left: 25px;
+background-color: #4b4747;
+margin-top: 15px;
 }
 
 .character-role {
-margin: 5px 0;
 color: #32d15a;
-
+margin-left: 30px;
 }
 .character-name {
 color: #32a9d1;
+margin-left: 30px;
 }
+
 /* Staff Section */
 .staff-section {
 background-color: white;

@@ -1,0 +1,348 @@
+.anime-container {
+    width: 100%;
+    position: relative;
+    font-family: Arial, sans-serif;
+    background-color: #1f1d1d;
+    
+  }
+  
+  /* 🏞 Banner Image (Full Width) */
+  .banner {
+    width: 100%;
+    height: 300px;
+    margin-bottom: 40px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* 📌 Anime Content Layout */
+  .anime-content {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px;
+    margin-top: -40px; /* Moves content up so the cover overlaps */
+    gap: 20px;
+    position: relative;
+  }
+  
+  /* 📌 Anime Cover Image (Proper Overlap) */
+  .anime-cover {
+    width: 220px;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 1px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: -60px; /* Adjusts the overlap */
+    left: 160px;
+    z-index: 2; /* Ensures it stays above text */
+  }
+  
+  .anime-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* 📌 Anime Info Section */
+  .anime-info {
+    flex: 1;
+    padding: 10px;
+    margin-left: 370px; /* Pushes text right to avoid overlap */
+    background:#1f1d1d;;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    
+  }
+  .Title {
+    max-height: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    color:#4dafdd;
+  }
+  .anime-description {
+   
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    color:#fdf1f1;
+    font-size: 20px;
+  }
+  .episodes {
+    max-height: 120px;
+    margin-top: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    color:#88d478;
+    font-size: 20px;
+  }
+  
+  .buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  /* 🟣 Watch & Favorites Button Fix */
+  .buttons button {
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+  
+  .anime-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-top: 55px;
+    margin-bottom: 35px;
+  }
+  
+  .anime-navigation a {
+    text-decoration: none;
+    color: rgb(245, 108, 108);
+    font-size: 18px;
+    transition: color 0.3s ease;
+    font-weight: bold;
+  }
+  .anime-navigation a:hover {
+    color: rgb(95, 156, 184);
+  }
+  
+  .status-button {
+    background-color: #cc54eba4 !important;  /* Customize the background color */
+    color: white !important;               /* Text color */
+    border-radius:5px !important;        /* Optional rounded corners */
+    padding: 8px 16px !important;          /* Padding for button size */
+    font-size: 16px !important;            /* Font size */
+    text-transform: capitalize ; /* Makes the text look better */
+  }
+  
+  .status-button:hover {
+    background-color: #5d0868 !important;  /* Change color on hover */
+  }
+  
+  @media (max-width: 768px) {
+    .details-grid {
+      grid-template-columns: 1fr; /* Stack columns on smaller screens */
+    }
+  }
+
+  /* Status Page Styles */
+
+.status-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .section-title {
+    margin: 20px 0 15px;
+    color: #4ba3df;
+    font-weight: 600;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #9bd1b8;
+  }
+  
+  /* Status Distribution Grid */
+  .status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .status-item {
+    background-color: #b6d87e;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    margin-top: 20px;
+  }
+  .status-item-current {
+    background-color: #97f500;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    margin-top: 10px;
+  }
+  .status-item-planning {
+    background-color: #00ddec;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    margin-top: 10px;
+  }
+  .status-item-paused {
+    background-color: #ad00d8;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    margin-top: 10px;
+  }
+  .status-item-dropped {
+    background-color: #f300cb;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    margin-top: 10px;
+  }
+  .status-item-completed {
+    background-color: #eb0470;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    margin-top: 10px;
+  }
+
+  
+  .status-item:hover {
+    transform: translateY(-3px);
+  }
+  
+  .status-count {
+    font-weight: 900;
+    color: #222c42;
+    margin-bottom: 5px;
+    margin-top: 10px;
+  }
+  
+  .status-label {
+    color: #271515;
+    font-size: 0.9rem;
+  }
+  
+  /* Score Distribution */
+  .score-distribution {
+    width: 100%;
+    margin-bottom: 30px;
+    background-color: #797676;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .score-bar-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .score-label {
+    width: 30px;
+    text-align: left;
+    margin-right: -20px;
+    color: #0f0909;
+    font-size: 0.8rem;
+  }
+  
+  .score-bar-wrapper {
+    flex-grow: 1;
+    height: 20px;
+    background-color: #e4e3e3;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  
+  .score-bar {
+    height: 100%;
+    background-color: #585c7e;
+    transition: width 0.5s ease;
+  }
+  
+  .score-count {
+    width: 60px;
+    text-align: right;
+    margin-left: 10px;
+    color: #520101;
+    font-size: 0.8rem;
+  }
+  
+  /* Rankings Grid */
+  .rankings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+    margin-top: 10px;
+  }
+  
+  .ranking-item {
+    background-color: #534f4f;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .ranking-item:hover {
+    transform: translateY(-3px);
+  }
+  
+  .ranking-position {
+    font-weight: 700;
+    color: #ff5a5a;
+    margin-bottom: 5px;
+    font-size: 1.3rem;
+  }
+  
+  .ranking-label {
+    color: #eee9e9;
+    font-size: 1.2rem;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .status-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .rankings-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .status-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .rankings-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .section-title {
+      font-size: 1.3rem;
+    }
+    
+    .status-count {
+      font-size: 1.3rem;
+    }
+    
+    .ranking-position {
+      font-size: 1.1rem;
+    }
+  }

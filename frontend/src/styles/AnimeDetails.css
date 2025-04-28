@@ -2,6 +2,7 @@
   width: 100%;
   position: relative;
   font-family: Arial, sans-serif;
+  background-color: #1f1d1d;
 }
 
 /* 🏞 Banner Image (Full Width) */
@@ -53,19 +54,35 @@
   flex: 1;
   padding: 10px;
   margin-left: 370px; /* Pushes text right to avoid overlap */
-  background: white;
+  background: #1f1d1d;
   padding: 20px;
   border-radius: 10px;
-  
+  margin-top: 20px;
 }
-
+.Title {
+  max-height: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
+  color:#4dafdd;
+}
 .anime-description {
   max-height: 120px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: wrap;
+  color:#fdf1f1;
+  font-size: 20px;
 }
-
+.episodes {
+  max-height: 120px;
+  margin-top: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: wrap;
+  color:#88d478;
+  font-size: 20px;
+}
 .buttons {
   margin-top: 20px;
   display: flex;
@@ -88,7 +105,7 @@
 
 .anime-navigation a {
   text-decoration: none;
-  color: rgb(99, 94, 94);
+  color: rgb(245, 108, 108);
   font-size: 18px;
   transition: color 0.3s ease;
   font-weight: bold;
@@ -99,7 +116,7 @@
 }
 
 .status-button {
-  background-color: #a809cfa4 !important;  /* Customize the background color */
+  background-color:  #cc54eba4 !important;  /* Customize the background color */
   color: white !important;               /* Text color */
   border-radius:5px !important;        /* Optional rounded corners */
   padding: 8px 16px !important;          /* Padding for button size */
@@ -120,24 +137,25 @@
 /* Details and Relations Container */
 .parent-container {
   display: flex;
-  justify-content: space-between; /* Optional: Adds space between the containers */
+  justify-content: space-between;
+  padding: -7px;
 }
 
 .details-container {
   display: flex;
   gap: -10px;
   margin-top: 60px;
-  width: 10%; 
+  width: 13%; 
   justify-content: space-between;
-  margin-left: 150px;
-  
+  margin-left: 30px;
+  margin-bottom: 30px;
 }
 
 /* Details Section */
 .details-section {
   flex: 2;
-  width: 20%; /* Takes up 60% of the container width */
-  background-color: white;
+  width: 90%; /* Takes up 60% of the container width */
+  background-color:rgb(59, 56, 56);
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -152,15 +170,16 @@
 
 .details-section h5 {
   font-size: 20px;
-  margin-bottom: 15px;
-  color: #333;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #db0d0d;
   font-weight: bold;
 }
 
 .details-section p {
   font-size: 14px;
   margin-bottom: 10px;
-  color: #555;
+  color: #f0eaea;
   line-height: 1.6;
 }
 
@@ -173,12 +192,12 @@
   display: flex;
   gap: 20px;
   margin-top: 60px;
-  width: 80%; 
+  width: 85%; 
   justify-content: space-between;
 }
 .relations-section {
   flex: 1;
-  background-color: white;
+  background-color: rgb(59, 56, 56);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -191,12 +210,18 @@
   gap: 20px;
   padding-bottom: 10px;
 }
-
+.relation-header{
+  font-size: 20px;
+  margin-top: 1px;
+  margin-bottom: 10px;
+  color: #a649f1;
+  font-weight: bold;
+}
 .relation-item {
   flex: 0 0 auto;
   width: 180px;
   height: 280px;
-  background-color: #f9f9f9;
+  background-color: #585454;
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
@@ -218,7 +243,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #e0e0e0;
+  background-color: #585454;
   color: #666;
   font-size: 14px;
 }
@@ -230,7 +255,7 @@
 .relation-info p {
   font-size: 14px;
   margin: 0;
-  color: #555;
+  color: #ddd3d3;
   line-height: 1.6;
 }
 
@@ -263,7 +288,7 @@ gap: 20px; /* Spacing between items */
 
 .character-item {
 .character-item {
-  background-color: #f9f9f960;
+  background-color: #4b4747;
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
@@ -293,16 +318,17 @@ margin-top: 10px;
 
 .character-info {
 font-size: 14px;
-color: #555;
+color: #eee8e8;
 margin-left: 30px;
 
 }
 
-.character-info p {
+.character-role {
 margin: 5px 0;
-}
+color: #32d15a;
 
-.character-info strong {
+}
+.character-name {
 color: #32a9d1;
 }
 /* Staff Section */
@@ -321,7 +347,14 @@ margin-bottom: 15px;
 color: #333;
 font-weight: bold;
 }
-
+.staff-header{
+  font-size: 20px;
+  margin-top: 1px;
+  margin-bottom: 10px;
+  color: #a649f1;
+  font-weight: bold;
+  margin-top: 10px;
+}
 .staff-grid {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive grid */
@@ -331,11 +364,12 @@ gap: 20px; /* Spacing between items */
 .staff-item {
 display: flex;
 align-items: center;
-background-color: #f9f9f9;
+background-color:rgb(82, 76, 76);
 border-radius: 10px;
 padding: 10px;
 box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 transition: transform 0.2s ease, box-shadow 0.2s ease;
+margin-top: 10px;
 }
 
 .staff-item:hover {
@@ -374,7 +408,7 @@ font-size: 14px;
 color: #777;
 }
 
-
+/* Modal Section */
 
 .modal-box {
   position: absolute;
@@ -386,4 +420,47 @@ color: #777;
   border-radius: 12px;
   padding: 24px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Tag Section */
+
+.tags-section {
+  margin-top: 1-0px;
+  padding: 15px;
+  background-color:  rgb(59, 56, 56);
+  border-radius: 8px;
+  margin-left:-10px;
+}
+
+.tags-section h5 {
+  margin-bottom: 10px;
+  color: #32a9d1;
+  font-size: 1.1rem;
+}
+
+.tags-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.tag-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background-color: #c0c4c5d3;
+  border-radius: 3px;
+}
+
+.tag-name {
+  color: #181717;
+  font-size: 0.9rem;
+  font-weight: bold;
+
+}
+
+.tag-percentage {
+  color: #128049;
+  font-size: 0.85rem;
+  font-weight: bold;
 }

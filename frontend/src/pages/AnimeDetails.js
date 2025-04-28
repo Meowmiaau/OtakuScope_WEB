@@ -1,6 +1,6 @@
 //frontend/src/pages/AnimeDetails.js
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams ,Link} from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import {
@@ -220,6 +220,11 @@ const AnimeDetails = () => {
                     studios { nodes { name } }
                     coverImage { large }
                     bannerImage
+                    tags {
+                          id
+                          name
+                          rank
+                        }
                     relations {
                         edges {
                           node {
@@ -340,14 +345,14 @@ const AnimeDetails = () => {
             </div>
 
             <div className="anime-info">
-              <Typography variant="h3">{anime.title.romaji}</Typography>
+              <Typography variant="h3" className="Title">{anime.title.romaji}</Typography>
               <Typography variant="body1" className="anime-description">
                 {anime.description
                   ?.replace(/<[^>]*>/g, "")
                   .replace(/\n/g, "\n") || "No description available."}
               </Typography>
-              <Typography variant="subtitle1">
-                <strong style={{ color: "#32a9d1" }}>Episodes:</strong>{" "}
+              <Typography variant="subtitle1" className="anime-description">
+                <strong className="episodes">Episodes:</strong>{" "}
                 {anime.episodes || "N/A"}
               </Typography>
 
@@ -410,11 +415,11 @@ const AnimeDetails = () => {
       )}
       {/* Navigation Bar */}
       <div className="anime-navigation">
-        <a href="#">Overview</a>
-        <a href="#">Characters</a>
-        <a href="#">Staff</a>
-        <a href="#">Stats</a>
-        <a href="#">Social</a>
+      <Link to={`/anime/${id}`}>Overview</Link>
+            <Link to={`/anime/${id}/characters`}>Characters</Link>
+            <Link to={`/anime/${id}/staff`}>Staff</Link>
+            <Link to={`/anime/${id}/status`}>Status</Link>
+            <Link to={`/home`}>Home</Link>
       </div>
 
       {/* Parent Container */}
@@ -468,12 +473,22 @@ const AnimeDetails = () => {
                 </p>
               </div>
             </div>
+            <h5 className="tags-section h5">Tags</h5> 
+                        {/* Tags Section */}
+                        <div className="tags-grid">
+                         {anime.tags?.slice(0, 19).map((tag) => (
+                         <div key={tag.id} className="tag-item">
+                          <span className="tag-name">{tag.name}</span>
+                            <span className="tag-percentage">{tag.rank}%</span>
+                       </div>
+                        ))} 
+                        </div>
           </div>
         </div>
         <div className="relations-container">
           {/* Relations Section */}
           <div className="relations-section">
-            <h3>Relations</h3>
+            <h3 className="relation-header">Relations</h3>
             <div className="relations-row">
               {anime.relations?.edges?.map((relation) => (
                 <div key={relation.node.id} className="relation-item">
@@ -500,7 +515,7 @@ const AnimeDetails = () => {
 
             {/* Characters Section */}
 
-            <h3>Characters</h3>
+            <h3 className="relation-header">Characters</h3>
             <div className="characters-grid">
               {Object.entries(
                 anime.characters?.edges?.reduce((acc, character) => {
@@ -543,7 +558,7 @@ const AnimeDetails = () => {
 
             {/* Staff Section */}
 
-            <h3>Staff</h3>
+            <h3 className="staff-header">Staff</h3>
             <div className="staff-grid">
               {anime.staff?.edges?.slice(0, 6).map((staff) => (
                 <div key={staff.node.id} className="staff-item">

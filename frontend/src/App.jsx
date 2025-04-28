@@ -4,7 +4,6 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Forum from './components/Forum';
 import GetStarted from './components/GetStarted';
 import Login from './components/Login';
-import MyAnime from './components/MyAnime';
 import Profile from './components/Profile';
 import Signup from './components/Signup';
 import AnimeDetails from './pages/AnimeDetails';
@@ -14,6 +13,9 @@ import Lists from './pages/Lists';
 import Character from './components/Character';
 import Staff from './components/Staff';
 import Status from './components/Status';
+import AllLists from './pages/AllLists';
+import ListDetailsPublic from './pages/ListDetailsPublic';
+
 const theme = createTheme({
     palette: {
         mode: 'dark', // Dark mode
@@ -39,10 +41,11 @@ const App = () => (
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/home" element={<Home />} />
-                <Route path="/myanime" element={<MyAnime />} />
                 <Route path="/lists" element={<Lists />} />
+                <Route path="/all-lists" element={<AllLists />} />
                 <Route path="/lists/:listId" element={<ListDetails />} />
                 <Route path="/profile/:username" element={<Profile />} />
+                <Route path="/public-list/:listId" element={<ListDetailsPublic />} />
                 <Route path="/forum" element={<Forum />} />
             </Routes>
         </Router>

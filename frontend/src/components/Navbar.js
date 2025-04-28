@@ -83,9 +83,9 @@ const Navbar = () => {
             <Toolbar>
             <Box sx={{ flexGrow: 1 }}>
                 <img
-                    src="\OtakuLOGO.png"  // Update the path to where your image is stored
+                    src="\OTAKUSCOPE.jpg"  // Update the path to where your image is stored
                     alt="OtakuScope"
-                    style={{ height: '48px' }} // Adjust height as necessary
+                    style={{ height: '70px' }} // Adjust height as necessary
                 />
             </Box>
                 <Box sx={{ flexGrow: 1, mx: 2, position: 'relative' }}>
@@ -177,14 +177,14 @@ const Navbar = () => {
                     }}>
                         Home
                     </Button>
-                    <Button color="inherit" component={Link} to="/myanime" sx={{
+                    <Button color="inherit" component={Link} to="/all-lists" sx={{
                         marginRight: 2,
                         fontFamily: "'Quicksand', sans-serif",
                         fontWeight: 600,
                         transition: "color 0.15s ease-in-out",
                         '&:hover': { color: '#bf00ff' }
                     }}>
-                        MyAnime
+                        ALL LISTS
                     </Button>
                     <Button color="inherit" component={Link} to="/lists" sx={{
                         marginRight: 2,
@@ -193,7 +193,7 @@ const Navbar = () => {
                         transition: "color 0.15s ease-in-out",
                         '&:hover': { color: '#bf00ff' }
                     }}>
-                        Lists
+                        USER's LISTS
                     </Button>
                     <Button color="inherit" component={Link} to={`/profile/${username}`} sx={{
                         marginRight: 2,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import Navbar from "../components/Navbar";
 const backendPath = "http://localhost:5000";
 
 const Lists = () => {
@@ -45,6 +45,8 @@ const Lists = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div style={{ padding: "24px", backgroundColor: "black", color: "white", minHeight: "100vh" }}>
       
       {/* Header */}
@@ -184,6 +186,7 @@ const Lists = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

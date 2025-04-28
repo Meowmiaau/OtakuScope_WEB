@@ -18,4 +18,6 @@ router.post('/:listId/anime', verifyToken, listController.addAnimeToList);
 // Delete anime from a list
 router.delete('/:listId/anime/:animeId', verifyToken, listController.deleteAnimeFromList);
 
+// Public route to fetch all lists
+router.get('/all',verifyToken, listController.getAllLists);
 module.exports = router;

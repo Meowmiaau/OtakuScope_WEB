@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useLocation } from "react-router-dom";
 import axios from "axios";
-
-const backendPath = "http://localhost:5000"; // your backend base path
+import Navbar from "../components/Navbar";
+const backendPath = "http://localhost:5000"; 
 
 const ListDetails = () => {
   const { listId } = useParams();
@@ -39,6 +39,8 @@ const ListDetails = () => {
   };
 
   return (
+    <>
+      <Navbar />
     <div style={{ 
       padding: "24px", 
       backgroundColor: "black", 
@@ -133,6 +135,7 @@ const ListDetails = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

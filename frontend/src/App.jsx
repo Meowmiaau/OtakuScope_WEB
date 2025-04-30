@@ -1,7 +1,6 @@
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import Forum from './components/Forum';
 import GetStarted from './components/GetStarted';
 import Login from './components/Login';
 import Profile from './components/Profile';

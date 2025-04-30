@@ -17,7 +17,8 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/anime', verifyToken, animeRoutes); // Protect anime routes with the verifyToken middleware
 app.use('/api/lists', verifyToken, listRoutes); // Protect list routes with the verifyToken middleware
-app.use('/api/reviews', verifyToken, reviewRoutes); // Protect review routes with the verifyToken middleware
+app.use('/api/reviews', reviewRoutes);
+
 const PORT = process.env.PORT || 5000;
 
 // Start the server

@@ -216,7 +216,18 @@ const ReviewSection = ({ animeId }) => {
 
             <Box className="review-other-section">
                 <Typography className='explore-reviews' variant="h6" gutterBottom>
-                    Explore Others&apos; Reviews ({totalReviews - 1})
+                    Explore Others&apos; reviews
+                    <Typography
+                        variant="subtitle1"
+                        sx={{
+                            marginBottom: 2,
+                            fontSize: '14px',
+                            color: '#121212',
+                            fontWeight: 500
+                        }}
+                        >
+                        Total Reviews ({totalReviews})
+                        </Typography>
                 </Typography>
 
                 {loading ? <CircularProgress /> : otherReviews.length > 0 ? (

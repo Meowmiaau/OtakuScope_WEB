@@ -69,9 +69,11 @@ const AllLists = () => {
             marginBottom: "32px",
           }}
         >
-          <h2 style={{ fontSize: "24px", fontWeight: "bold" }}>
+          <div> 
+          <h2 style={{ marginLeft: "790px", fontSize: "29px", fontWeight: "bold",color: "rgb(135, 61, 209)" }}>
             All User Lists
           </h2>
+          </div>
         </div>
 
         {/* Lists */}
@@ -86,7 +88,8 @@ const AllLists = () => {
                   padding: "20px",
                   border: "1px solid white",
                   borderRadius: "8px",
-                  backgroundColor: "black",
+                  backgroundColor: "rgb(38, 47, 58)",
+                  borderColor:"rgb(209, 209, 209)",
                 }}
               >
                 {/* List Title, Username, and Updated At */}
@@ -119,7 +122,7 @@ const AllLists = () => {
                           fontSize: "20px",
                           fontWeight: "600",
                           cursor: "pointer",
-                          color: "white",
+                          color: "rgb(87, 99, 202)",
                           margin: 0,
                         }}
                       >
@@ -128,7 +131,7 @@ const AllLists = () => {
                             pathname: `/public-list/${list.id}`,
                             listName: list.name,
                           }}
-                          style={{ textDecoration: "none", color: "white" }}
+                          style={{ textDecoration: "none", fontSize: "27px",color: "rgb(60, 174, 209)" }}
                         >
                           {list.name}
                         </Link>
@@ -145,7 +148,7 @@ const AllLists = () => {
                         </span>
                       )}
                     </div>
-                    <p style={{ fontSize: "14px", color: "#9ca3af" }}>
+                    <p style={{ fontSize: "17px", color: "rgb(171, 162, 180)", marginTop: "1px"}}>
                       Created by: {list.username}
                     </p>
                   </div>
@@ -155,17 +158,19 @@ const AllLists = () => {
                 <div
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(5, 1fr)",
-                    gap: "24px",
+                    gridTemplateColumns: "repeat(6, 1fr)",
+                    gap: "px",
+                    marginTop: "-16px",
+                    marginLeft:"1-px",
                   }}
                 >
-                  {Array.from({ length: 5 }).map((_, index) => {
+                  {Array.from({ length: 6}).map((_, index) => {
                     const animeId = list.animeIds?.[index];
                     return (
                       <div
                         key={index}
                         style={{
-                          width: "100%",
+                          width: "80%",
                           aspectRatio: "1/1",
                           backgroundColor: "#111",
                           display: "flex",
@@ -179,7 +184,7 @@ const AllLists = () => {
                         {animeId ? (
                           <AnimeBox animeId={animeId} />
                         ) : (
-                          <div style={{ color: "#9ca3af" }}>Empty</div>
+                          <div style={{ fontSize: "19px",color:"rgb(255, 255, 255)"  }}>Empty</div>
                         )}
                       </div>
                     );

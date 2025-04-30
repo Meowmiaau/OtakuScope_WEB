@@ -45,7 +45,7 @@ const App = () => (
                 <Route path="/lists/:listId" element={<ListDetails />} />
                 <Route path="/profile/:username" element={<Profile />} />
                 <Route path="/public-list/:listId" element={<ListDetailsPublic />} />
-                <Route path="/forum" element={<Forum />} />
+                
             </Routes>
         </Router>
     </ThemeProvider>

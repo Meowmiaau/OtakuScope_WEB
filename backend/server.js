@@ -6,7 +6,7 @@ const listRoutes = require('./routes/listRoutes');
 const { checkConnection } = require('./config/db');
 const verifyToken = require('./middleware/authMiddleware');
 const reviewRoutes = require('./routes/reviewRoutes');
-const forumRoutes = require('./routes/forumRoutes');
+
 
 const app = express();
 
@@ -19,9 +19,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/anime', verifyToken, animeRoutes); // Protect anime routes with the verifyToken middleware
 app.use('/api/lists', verifyToken, listRoutes); // Protect list routes with the verifyToken middleware
 app.use('/api/reviews', reviewRoutes);
-// For forums:
-app.use('/api/forum', forumRoutes);
-app.use('/api/forum/posts', forumRoutes);
+
 
 const PORT = process.env.PORT || 5000;
 

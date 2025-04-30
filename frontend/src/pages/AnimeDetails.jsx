@@ -1,6 +1,6 @@
 //frontend/src/pages/AnimeDetails.js
 import React, { useEffect, useState } from "react";
-import { useParams ,Link} from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import {
@@ -38,12 +38,11 @@ const StatusButton = ({
     handleClose();
 
     try {
-      // Send the update immediately to the backend
       await axios.post(
         `${backendPath}/api/anime/${id}`,
         {
           status: newStatus,
-          is_favorite: isFavorite, // Use the passed prop
+          is_favorite: isFavorite,
           score,
         },
         {
@@ -74,7 +73,6 @@ const StatusButton = ({
 
 const ScoreDropdown = ({ score, setScore, watch_status, isFavorite, id }) => {
   const [anchorEl, setAnchorEl] = useState(null);
-
   const handleClick = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
 
@@ -136,6 +134,7 @@ const AnimeDetails = () => {
   const { id } = useParams();
   const [anime, setAnime] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [recommendations, setRecommendations] = useState([]);
 
   const [snackbar, setSnackbar] = useState({
     open: false,
@@ -284,8 +283,40 @@ const AnimeDetails = () => {
 
     fetchDetails();
   }, [id]);
+  useEffect(() => {
+    if (anime) {
+      const fetchRecommendations = async () => {
+        try {
+          const payload = {
+            description:
+              anime.description?.replace(/<[^>]*>/g, "").slice(0, 500) || "",
+            genres: anime.genres || [],
+            tags:
+              anime.tags?.map((tag) => ({
+                name: tag.name,
+                isMediaSpoiler: false,
+              })) || [],
+            studios: {
+              edges:
+                anime.studios?.nodes.map((name) => ({ node: { name } })) || [],
+            },
+          };
 
-  
+          const response = await axios.post(
+            "http://localhost:8000/recommend",
+            payload
+          );
+          console.log("Recommendations response:", response.data);
+          setRecommendations(response.data); 
+        } catch (err) {
+          console.error("Error fetching recommendations:", err);
+        }
+      };
+
+      fetchRecommendations();
+    }
+  }, [anime]);
+
   const handleCloseSnackbar = () => {
     setSnackbar({ ...snackbar, open: false });
   };
@@ -294,281 +325,345 @@ const AnimeDetails = () => {
 
   return (
     <>
-    <Navbar />
-    <Box className="anime-container">
-      {anime ? (
-        <>
-          <div className="banner">
-            {anime.bannerImage ? (
-              <img
-                src={anime.bannerImage}
-                alt="Banner"
-                className="banner-img"
-              />
-            ) : (
-              <div className="no-banner">No Banner</div>
-            )}
-          </div>
-
-          <div className="anime-content">
-            <div className="anime-cover">
-              {anime.coverImage?.large ? (
-                <img src={anime.coverImage.large} alt={anime.title.romaji} />
+      <Navbar />
+      <Box className="anime-container">
+        {anime ? (
+          <>
+            <div className="banner">
+              {anime.bannerImage ? (
+                <img
+                  src={anime.bannerImage}
+                  alt="Banner"
+                  className="banner-img"
+                />
               ) : (
-                <div className="no-cover">No Cover</div>
+                <div className="no-banner">No Banner</div>
               )}
             </div>
 
-            <div className="anime-info">
-              <Typography variant="h3" className="Title">{anime.title.romaji}</Typography>
-              <Typography variant="body1" className="anime-description">
-                {anime.description
-                  ?.replace(/<[^>]*>/g, "")
-                  .replace(/\n/g, "\n") || "No description available."}
-              </Typography>
-              <Typography variant="subtitle1" className="anime-description">
-                <strong className="episodes">Episodes:</strong>{" "}
-                {anime.episodes || "N/A"}
-              </Typography>
-
-              <div className="buttons">
-                <StatusButton
-                  watch_status={watch_status}
-                  setWatchStatus={setWatchStatus}
-                  id={id}
-                  isFavorite={isFavorite}
-                  score={score}
-                />
-
-                <ScoreDropdown
-                  score={score}
-                  setScore={setScore}
-                  watch_status={watch_status}
-                  isFavorite={isFavorite}
-                  id={id}
-                />
-
-                <Button onClick={handleFavoriteToggle}>
-                  {isFavorite ? (
-                    <FavoriteIcon style={{ color: "red" }} />
-                  ) : (
-                    <FavoriteBorderIcon />
-                  )}
-                </Button>
-                <Button onClick={() => setOpenAddModal(true)}>
-                  Add to Lists..
-                </Button>
-                <AddToListModal
-                  open={openAddModal}
-                  onClose={() => setOpenAddModal(false)}
-                  animeId={id} // pass the anime id
-                  onSuccess={() => {
-                    // optional callback when anime successfully added
-                    setSnackbar({
-                      open: true,
-                      message: "Anime added to list!",
-                      severity: "success",
-                    });
-                  }}
-                />
+            <div className="anime-content">
+              <div className="anime-cover">
+                {anime.coverImage?.large ? (
+                  <img src={anime.coverImage.large} alt={anime.title.romaji} />
+                ) : (
+                  <div className="no-cover">No Cover</div>
+                )}
               </div>
-            </div>
-          </div>
 
-          <Snackbar
-            open={snackbar.open}
-            autoHideDuration={6000}
-            onClose={handleCloseSnackbar}
-          >
-            <Alert onClose={handleCloseSnackbar} severity={snackbar.severity}>
-              {snackbar.message}
-            </Alert>
-          </Snackbar>
-        </>
-      ) : (
-        <Typography variant="h5">No Anime Data Available</Typography>
-      )}
-      {/* Navigation Bar */}
-      <div className="anime-navigation">
-      <Link to={`/anime/${id}`}>Overview</Link>
-            <Link to={`/anime/${id}/character`}>Characters</Link>
-            <Link to={`/anime/${id}/staff`}>Staff</Link>
-            <Link to={`/anime/${id}/status`}>Status</Link>
-            <Link to={`/home`}>Home</Link>
-      </div>
+              <div className="anime-info">
+                <Typography variant="h3" className="Title">
+                  {anime.title.romaji}
+                </Typography>
+                <Typography variant="body1" className="anime-description">
+                  {anime.description
+                    ?.replace(/<[^>]*>/g, "")
+                    .replace(/\n/g, "\n") || "No description available."}
+                </Typography>
+                <Typography variant="subtitle1" className="anime-description">
+                  <strong className="episodes">Episodes:</strong>{" "}
+                  {anime.episodes || "N/A"}
+                </Typography>
 
-      {/* Parent Container */}
-      <div className="parent-container">
-        {/* Details Container */}
-        <div className="details-container">
-          {/* Details Section */}
-          <div className="details-section">
-            <div className="details-grid">
-              <div>
-                <h5>Details</h5>
-                <p>
-                  <strong>Format:</strong> TV
-                </p>
-                <p>
-                  <strong>Episodes:</strong> {anime.episodes || "N/A"}
-                </p>
-                <p>
-                  <strong>Episode Duration:</strong> {anime.duration || "N/A"}{" "}
-                  mins
-                </p>
-                <p>
-                  <strong>Status:</strong> {anime.status || "N/A"}
-                </p>
-                <p>
-                  <strong>Start Date:</strong> {anime.startDate?.year || "N/A"}-
-                  {anime.startDate?.month || "N/A"}-
-                  {anime.startDate?.day || "N/A"}
-                </p>
-                <p>
-                  <strong>Season:</strong> {anime.season || "N/A"}{" "}
-                  {anime.startDate?.year || ""}
-                </p>
-                <p>
-                  <strong>Average Score:</strong> {anime.averageScore || "N/A"}%
-                </p>
-                <p>
-                  <strong>Mean Score:</strong> {anime.meanScore || "N/A"}%
-                </p>
-                <p>
-                  <strong>Popularity:</strong> {anime.popularity || "N/A"}
-                </p>
-                <p>
-                  <strong>Favorites:</strong> {anime.favourites || "N/A"}
-                </p>
-                <p>
-                  <strong>Studios:</strong>{" "}
-                  {anime.studios?.nodes
-                    ?.map((studio) => studio.name)
-                    .join(", ") || "N/A"}
-                </p>
-              </div>
-            </div>
-            <h5 className="tags-section h5">Tags</h5>
-                        {/* Tags Section */}
-                        <div className="tags-grid">
-                         {anime.tags?.slice(0, 19).map((tag) => (
-                         <div key={tag.id} className="tag-item">
-                          <span className="tag-name">{tag.name}</span>
-                            <span className="tag-percentage">{tag.rank}%</span>
-                       </div>
-                        ))}
-                        </div>
-          </div>
-        </div>
-        <div className="relations-container">
-          {/* Relations Section */}
-          <div className="relations-section">
-            <h3 className="relation-header">Relations</h3>
-            <div className="relations-row">
-              {anime.relations?.edges?.map((relation) => (
-                <div key={relation.node.id} className="relation-item">
-                  {relation.node.coverImage?.large ? (
-                    <img
-                      src={relation.node.coverImage.large}
-                      alt={relation.node.title.romaji}
-                      className="relation-image"
-                    />
-                  ) : (
-                    <div className="no-image">No Image Available</div>
-                  )}
-                  <div className="relation-info">
-                    <p>
-                      <strong>{relation.relationType}:</strong>
-                    </p>
-                    <p>
-                      {relation.node.title.romaji} ({relation.node.format})
-                    </p>
-                  </div>
+                <div className="buttons">
+                  <StatusButton
+                    watch_status={watch_status}
+                    setWatchStatus={setWatchStatus}
+                    id={id}
+                    isFavorite={isFavorite}
+                    score={score}
+                  />
+
+                  <ScoreDropdown
+                    score={score}
+                    setScore={setScore}
+                    watch_status={watch_status}
+                    isFavorite={isFavorite}
+                    id={id}
+                  />
+
+                  <Button onClick={handleFavoriteToggle}>
+                    {isFavorite ? (
+                      <FavoriteIcon style={{ color: "red" }} />
+                    ) : (
+                      <FavoriteBorderIcon />
+                    )}
+                  </Button>
+                  <Button onClick={() => setOpenAddModal(true)}>
+                    Add to Lists..
+                  </Button>
+                  <AddToListModal
+                    open={openAddModal}
+                    onClose={() => setOpenAddModal(false)}
+                    animeId={id} // pass the anime id
+                    onSuccess={() => {
+                      // optional callback when anime successfully added
+                      setSnackbar({
+                        open: true,
+                        message: "Anime added to list!",
+                        severity: "success",
+                      });
+                    }}
+                  />
                 </div>
-              ))}
+              </div>
             </div>
 
-            {/* Characters Section */}
+            <Snackbar
+              open={snackbar.open}
+              autoHideDuration={6000}
+              onClose={handleCloseSnackbar}
+            >
+              <Alert onClose={handleCloseSnackbar} severity={snackbar.severity}>
+                {snackbar.message}
+              </Alert>
+            </Snackbar>
+          </>
+        ) : (
+          <Typography variant="h5">No Anime Data Available</Typography>
+        )}
+        {/* Navigation Bar */}
+        <div className="anime-navigation">
+          <Link to={`/anime/${id}`}>Overview</Link>
+          <Link to={`/anime/${id}/character`}>Characters</Link>
+          <Link to={`/anime/${id}/staff`}>Staff</Link>
+          <Link to={`/anime/${id}/status`}>Status</Link>
+          <Link to={`/home`}>Home</Link>
+        </div>
 
-            <h3 className="relation-header">Characters</h3>
-            <div className="characters-grid">
-              {Object.entries(
-                anime.characters?.edges?.reduce((acc, character) => {
-                  const characterName = character.node.name.full;
-                  if (!acc[characterName]) {
-                    acc[characterName] = {
-                      role: character.role,
-                      image: character.node.image.large,
-                      voiceActors: [],
-                    };
-                  }
-                  character.voiceActors?.forEach((voiceActor) => {
-                    acc[characterName].voiceActors.push(
-                      `${voiceActor.name.full} (${voiceActor.language})`
-                    );
-                  });
-                  return acc;
-                }, {})
-              )
-                .slice(0, 7) // Limit to top 6 characters
-                .map(([characterName, data]) => (
-                  <div key={characterName} className="character-item" style={{backgroundColor: "#585454", marginLeft:"-17px", borderRadius:"5px", width:"180px",height:"250px", marginRight:"-25px", padding:"5px"}}>
-                    <div className="character-image-container">
-                      <img
-                        src={data.image}
-                        alt={characterName}
-                        className="character-image"
-                      />
-
-                    </div>
-                    <div>
-                    <p className="character-name">{characterName}</p>
-                    <p className="character-role">{data.role}</p>
-                    </div>
-
-                    {/* Character Info */}
-
+        {/* Parent Container */}
+        <div className="parent-container">
+          {/* Details Container */}
+          <div className="details-container">
+            {/* Details Section */}
+            <div className="details-section">
+              <div className="details-grid">
+                <div>
+                  <h5>Details</h5>
+                  <p>
+                    <strong>Format:</strong> TV
+                  </p>
+                  <p>
+                    <strong>Episodes:</strong> {anime.episodes || "N/A"}
+                  </p>
+                  <p>
+                    <strong>Episode Duration:</strong> {anime.duration || "N/A"}{" "}
+                    mins
+                  </p>
+                  <p>
+                    <strong>Status:</strong> {anime.status || "N/A"}
+                  </p>
+                  <p>
+                    <strong>Start Date:</strong>{" "}
+                    {anime.startDate?.year || "N/A"}-
+                    {anime.startDate?.month || "N/A"}-
+                    {anime.startDate?.day || "N/A"}
+                  </p>
+                  <p>
+                    <strong>Season:</strong> {anime.season || "N/A"}{" "}
+                    {anime.startDate?.year || ""}
+                  </p>
+                  <p>
+                    <strong>Average Score:</strong>{" "}
+                    {anime.averageScore || "N/A"}%
+                  </p>
+                  <p>
+                    <strong>Mean Score:</strong> {anime.meanScore || "N/A"}%
+                  </p>
+                  <p>
+                    <strong>Popularity:</strong> {anime.popularity || "N/A"}
+                  </p>
+                  <p>
+                    <strong>Favorites:</strong> {anime.favourites || "N/A"}
+                  </p>
+                  <p>
+                    <strong>Studios:</strong>{" "}
+                    {anime.studios?.nodes
+                      ?.map((studio) => studio.name)
+                      .join(", ") || "N/A"}
+                  </p>
+                </div>
+              </div>
+              <h5 className="tags-section h5">Tags</h5>
+              {/* Tags Section */}
+              <div className="tags-grid">
+                {anime.tags?.slice(0, 19).map((tag) => (
+                  <div key={tag.id} className="tag-item">
+                    <span className="tag-name">{tag.name}</span>
+                    <span className="tag-percentage">{tag.rank}%</span>
                   </div>
                 ))}
+              </div>
             </div>
-
-            {/* Staff Section */}
-
-            <h3 className="staff-header">Staff</h3>
-            <div className="staff-grid">
-              {anime.staff?.edges?.slice(0, 6).map((staff) => (
-                <div key={staff.node.id} className="staff-item">
-                  {/* Staff Image */}
-                  <div className="staff-image-container">
-                    {staff.node.image?.large ? (
+          </div>
+          <div className="relations-container">
+            {/* Relations Section */}
+            <div className="relations-section">
+              <h3 className="relation-header">Relations</h3>
+              <div className="relations-row">
+                {anime.relations?.edges?.map((relation) => (
+                  <div key={relation.node.id} className="relation-item">
+                    {relation.node.coverImage?.large ? (
                       <img
-                        src={staff.node.image.large}
-                        alt={staff.node.name.full}
-                        className="staff-image"
+                        src={relation.node.coverImage.large}
+                        alt={relation.node.title.romaji}
+                        className="relation-image"
                       />
                     ) : (
                       <div className="no-image">No Image Available</div>
                     )}
+                    <div className="relation-info">
+                      <p>
+                        <strong>{relation.relationType}:</strong>
+                      </p>
+                      <p>
+                        {relation.node.title.romaji} ({relation.node.format})
+                      </p>
+                    </div>
                   </div>
+                ))}
+              </div>
 
-                  {/* Staff Info */}
-                  <div className="staff-info">
-                    <p className="staff-name">{staff.node.name.full}</p>
-                    <p className="staff-role">{staff.role}</p>
+              {/* Characters Section */}
+
+              <h3 className="relation-header">Characters</h3>
+              <div className="characters-grid">
+                {Object.entries(
+                  anime.characters?.edges?.reduce((acc, character) => {
+                    const characterName = character.node.name.full;
+                    if (!acc[characterName]) {
+                      acc[characterName] = {
+                        role: character.role,
+                        image: character.node.image.large,
+                        voiceActors: [],
+                      };
+                    }
+                    character.voiceActors?.forEach((voiceActor) => {
+                      acc[characterName].voiceActors.push(
+                        `${voiceActor.name.full} (${voiceActor.language})`
+                      );
+                    });
+                    return acc;
+                  }, {})
+                )
+                  .slice(0, 7) // Limit to top 6 characters
+                  .map(([characterName, data]) => (
+                    <div
+                      key={characterName}
+                      className="character-item"
+                      style={{
+                        backgroundColor: "#585454",
+                        marginLeft: "-17px",
+                        borderRadius: "5px",
+                        width: "180px",
+                        height: "250px",
+                        marginRight: "-25px",
+                        padding: "5px",
+                      }}
+                    >
+                      <div className="character-image-container">
+                        <img
+                          src={data.image}
+                          alt={characterName}
+                          className="character-image"
+                        />
+                      </div>
+                      <div>
+                        <p className="character-name">{characterName}</p>
+                        <p className="character-role">{data.role}</p>
+                      </div>
+
+                      {/* Character Info */}
+                    </div>
+                  ))}
+              </div>
+
+              {/* Staff Section */}
+
+              <h3 className="staff-header">Staff</h3>
+              <div className="staff-grid">
+                {anime.staff?.edges?.slice(0, 6).map((staff) => (
+                  <div key={staff.node.id} className="staff-item">
+                    {/* Staff Image */}
+                    <div className="staff-image-container">
+                      {staff.node.image?.large ? (
+                        <img
+                          src={staff.node.image.large}
+                          alt={staff.node.name.full}
+                          className="staff-image"
+                        />
+                      ) : (
+                        <div className="no-image">No Image Available</div>
+                      )}
+                    </div>
+
+                    {/* Staff Info */}
+                    <div className="staff-info">
+                      <p className="staff-name">{staff.node.name.full}</p>
+                      <p className="staff-role">{staff.role}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="reviews-section-wrapper">
-        <ReviewSection animeId={id} />
-      </div>
-      <div className="footer">
-        <p>© 2023 Anime Reviews. All rights reserved.</p>
-      </div>
-    </Box>
+        {recommendations.length > 0 && (
+          <Box className="recommendations-section" sx={{ mt: 5 }}>
+            <Typography variant="h4" sx={{ mb: 2 }}>
+              Recommended Anime
+            </Typography>
+            <Box display="flex" flexWrap="wrap" gap={3}>
+              {recommendations.map((rec, index) => {
+                console.log("Recommendation data:", rec);
+                return (
+                <Box
+                  key={index}
+                  p={2}
+                  sx={{
+                    width: 250,
+                    border: "1px solid #ccc",
+                    borderRadius: "12px",
+                    backgroundColor: "#2b2b2b",
+                    color: "white",
+                    transition: "transform 0.2s",
+                    "&:hover": {
+                      transform: "scale(1.03)",
+                    },
+                  }}
+                >
+                  <Link
+                    to={`/anime/${rec.Mal_id}`}
+                    style={{
+                      textDecoration: "none",
+                      color: "#90caf9",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <Typography variant="h6" sx={{ mb: 1 }}>
+                      {rec.Title}
+                    </Typography>
+                  </Link>
+                  <Typography variant="body2" sx={{ fontStyle: "italic" }}>
+                    {rec.Genres}
+                  </Typography>
+                  <Typography variant="body2" sx={{ mt: 1 }}>
+                    {rec.Synopsis?.substring(0, 150) ||
+                      "No synopsis available."}
+                  </Typography>
+                </Box>
+              );
+})}
+            </Box>
+          </Box>
+        )}
+
+        <div className="reviews-section-wrapper">
+          <ReviewSection animeId={id} />
+        </div>
+        <div className="footer">
+          <p>© 2023 Anime Reviews. All rights reserved.</p>
+        </div>
+      </Box>
     </>
   );
 };

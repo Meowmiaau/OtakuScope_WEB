@@ -1,7 +1,10 @@
+import axios from "axios";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import Navbar from "../components/Navbar";
+dayjs.extend(relativeTime);
 
 const backendPath = "http://localhost:5000";
 
@@ -36,7 +39,6 @@ const AllLists = () => {
       }
 
       const totalLists = res.data.total || res.data?.length || 0;
-      console.log;
       setHasMore(totalLists > page * listsPerPage);
     } catch (err) {
       console.error("Error fetching lists:", err);
@@ -53,7 +55,7 @@ const AllLists = () => {
       <div
         style={{
           padding: "24px",
-          backgroundColor: "black",
+          backgroundColor: "#272727",
           color: "white",
           minHeight: "100vh",
         }}
@@ -87,31 +89,62 @@ const AllLists = () => {
                   backgroundColor: "black",
                 }}
               >
-                {/* List Title */}
+                {/* List Title, Username, and Updated At */}
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
                     marginBottom: "20px",
+                    flexWrap: "wrap",
+                    gap: "8px",
                   }}
                 >
-                  <div>
-                    <h3
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "4px",
+                    }}
+                  >
+                    <div
                       style={{
-                        fontSize: "20px",
-                        fontWeight: "600",
-                        cursor: "pointer",
-                        color: "white",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "16px",
                       }}
                     >
-                      <Link
-                        to={{pathname: `/public-list/${list.id}`,listName: list.name}}
-                        style={{ textDecoration: "none", color: "white" }}
+                      <h3
+                        style={{
+                          fontSize: "20px",
+                          fontWeight: "600",
+                          cursor: "pointer",
+                          color: "white",
+                          margin: 0,
+                        }}
                       >
-                        {list.name}
-                      </Link>
-                    </h3>
+                        <Link
+                          to={{
+                            pathname: `/public-list/${list.id}`,
+                            listName: list.name,
+                          }}
+                          style={{ textDecoration: "none", color: "white" }}
+                        >
+                          {list.name}
+                        </Link>
+                      </h3>
+                      {list.updatedAt && (
+                        <span
+                          style={{
+                            fontSize: "14px",
+                            color: "#9ca3af",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          Last updated {dayjs(list.updatedAt).fromNow()}
+                        </span>
+                      )}
+                    </div>
                     <p style={{ fontSize: "14px", color: "#9ca3af" }}>
                       Created by: {list.username}
                     </p>

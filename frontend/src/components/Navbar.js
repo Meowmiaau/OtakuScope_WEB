@@ -157,6 +157,12 @@ const Navbar = () => {
                                     button
                                     key={anime.id}
                                     onClick={() => handleResultClick(anime.id)}
+                                    sx={{
+                                        '&:hover': {
+                                            backgroundColor: 'rgba(191, 0, 255, 0.1)',
+                                            boxShadow: '0 0 8px rgba(191, 0, 255, 0.3)'
+                                        }
+                                    }}
                                 >
                                     <ListItemAvatar>
                                         <Avatar src={anime.coverImage.medium} alt={anime.title.romaji} />
@@ -172,8 +178,24 @@ const Navbar = () => {
                         marginRight: 2,
                         fontFamily: "'Quicksand', sans-serif",
                         fontWeight: 600,
-                        transition: "color 0.15s ease-in-out",
-                        '&:hover': { color: '#bf00ff' }
+                        transition: "all 0.3s ease-in-out",
+                        position: 'relative',
+                        '&:hover': { 
+                            color: '#bf00ff',
+                            transform: 'translateY(-2px)',
+                            '&::after': {
+                                content: '""',
+                                position: 'absolute',
+                                bottom: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '2px',
+                                backgroundColor: '#bf00ff',
+                                transform: 'scaleX(1)',
+                                transformOrigin: 'bottom center',
+                                boxShadow: '0 0 8px rgba(191, 0, 255, 0.8)'
+                            }
+                        }
                     }}>
                         Home
                     </Button>
@@ -181,8 +203,24 @@ const Navbar = () => {
                         marginRight: 2,
                         fontFamily: "'Quicksand', sans-serif",
                         fontWeight: 600,
-                        transition: "color 0.15s ease-in-out",
-                        '&:hover': { color: '#bf00ff' }
+                        transition: "all 0.3s ease-in-out",
+                        position: 'relative',
+                        '&:hover': { 
+                            color: '#bf00ff',
+                            transform: 'translateY(-2px)',
+                            '&::after': {
+                                content: '""',
+                                position: 'absolute',
+                                bottom: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '2px',
+                                backgroundColor: '#bf00ff',
+                                transform: 'scaleX(1)',
+                                transformOrigin: 'bottom center',
+                                boxShadow: '0 0 8px rgba(191, 0, 255, 0.8)'
+                            }
+                        }
                     }}>
                         ALL LISTS
                     </Button>
@@ -190,8 +228,24 @@ const Navbar = () => {
                         marginRight: 2,
                         fontFamily: "'Quicksand', sans-serif",
                         fontWeight: 600,
-                        transition: "color 0.15s ease-in-out",
-                        '&:hover': { color: '#bf00ff' }
+                        transition: "all 0.3s ease-in-out",
+                        position: 'relative',
+                        '&:hover': { 
+                            color: '#bf00ff',
+                            transform: 'translateY(-2px)',
+                            '&::after': {
+                                content: '""',
+                                position: 'absolute',
+                                bottom: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '2px',
+                                backgroundColor: '#bf00ff',
+                                transform: 'scaleX(1)',
+                                transformOrigin: 'bottom center',
+                                boxShadow: '0 0 8px rgba(191, 0, 255, 0.8)'
+                            }
+                        }
                     }}>
                         USER's LISTS
                     </Button>
@@ -199,8 +253,24 @@ const Navbar = () => {
                         marginRight: 2,
                         fontFamily: "'Quicksand', sans-serif",
                         fontWeight: 600,
-                        transition: "color 0.15s ease-in-out",
-                        '&:hover': { color: '#bf00ff' }
+                        transition: "all 0.3s ease-in-out",
+                        position: 'relative',
+                        '&:hover': { 
+                            color: '#bf00ff',
+                            transform: 'translateY(-2px)',
+                            '&::after': {
+                                content: '""',
+                                position: 'absolute',
+                                bottom: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '2px',
+                                backgroundColor: '#bf00ff',
+                                transform: 'scaleX(1)',
+                                transformOrigin: 'bottom center',
+                                boxShadow: '0 0 8px rgba(191, 0, 255, 0.8)'
+                            }
+                        }
                     }}>
                         Profile
                     </Button>
@@ -208,8 +278,24 @@ const Navbar = () => {
                         marginRight: 2,
                         fontFamily: "'Quicksand', sans-serif",
                         fontWeight: 600,
-                        transition: "color 0.15s ease-in-out",
-                        '&:hover': { color: '#bf00ff' }
+                        transition: "all 0.3s ease-in-out",
+                        position: 'relative',
+                        '&:hover': { 
+                            color: '#bf00ff',
+                            transform: 'translateY(-2px)',
+                            '&::after': {
+                                content: '""',
+                                position: 'absolute',
+                                bottom: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '2px',
+                                backgroundColor: '#bf00ff',
+                                transform: 'scaleX(1)',
+                                transformOrigin: 'bottom center',
+                                boxShadow: '0 0 8px rgba(191, 0, 255, 0.8)'
+                            }
+                        }
                     }}>
                         Forum
                     </Button>
@@ -219,11 +305,25 @@ const Navbar = () => {
                         fontWeight: 700,
                         color: '#bf00ff',
                         borderColor: '#bf00ff',
+                        transition: "all 0.3s ease-in-out",
+                        position: 'relative',
                         '&:hover': {
                             backgroundColor: 'rgba(191, 0, 255, 0.1)',
                             borderColor: 'rgba(255, 0, 255)',
                             color: '#bf00ff',
-                            boxShadow: "0 0 4px rgba(255, 0, 0, 0.6), 0 0 8px rgba(255, 0, 0, 0.45)"
+                            boxShadow: "0 0 8px rgba(191, 0, 255, 0.8)",
+                            transform: 'translateY(-2px)',
+                            '&::after': {
+                                content: '""',
+                                position: 'absolute',
+                                bottom: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '2px',
+                                backgroundColor: '#bf00ff',
+                                transform: 'scaleX(1)',
+                                transformOrigin: 'bottom center'
+                            }
                         }
                     }}>
                         Logout

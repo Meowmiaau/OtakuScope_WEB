@@ -120,14 +120,20 @@ const scoreDistributionData = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map(scor
       {/* Banner */}
       <div className="banner">
         {anime.bannerImage ? (
-          <img src={anime.bannerImage} alt="Banner" className="banner-img" />
+         <div className="banner-fade">
+         <img
+           src={anime.bannerImage}
+           alt="Banner"
+           className="banner-img"
+         />
+       </div>
         ) : (
           <div className="no-banner">No Banner</div>
         )}
       </div>
 
       {/* Cover Image and Title */}
-      <div className="anime-content">
+      <div className="anime-content" style={{ marginTop: "2px" }}>
         <div className="anime-cover">
           {anime.coverImage?.large ? (
             <img src={anime.coverImage.large} alt={anime.title.romaji} />

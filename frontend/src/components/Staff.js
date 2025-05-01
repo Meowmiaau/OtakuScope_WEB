@@ -84,14 +84,20 @@ const Staff = () => {
           {/* Banner */}
           <div className="banner">
             {anime.bannerImage ? (
-              <img src={anime.bannerImage} alt="Banner" className="banner-img" />
+             <div className="banner-fade">
+             <img
+               src={anime.bannerImage}
+               alt="Banner"
+               className="banner-img"
+             />
+           </div>
             ) : (
               <div className="no-banner">No Banner</div>
             )}
           </div>
 
           {/* Cover Image and Title */}
-          <div className="anime-content">
+          <div className="anime-content" style={{ marginTop: "20px" }}>
             <div className="anime-cover">
               {anime.coverImage?.large ? (
                 <img src={anime.coverImage.large} alt={anime.title.romaji} />
@@ -126,14 +132,14 @@ const Staff = () => {
           </div>
 
           {/* Staff Section */}
-          <div className="staff-members">
+          <div className="staff-members" >
   {staff.map((member) => (
-    <div key={member.node?.id} className="staff-member">
+    <div key={member.node?.id} className="staff-member"  style={{width: "120px", height: "140px"}}>
       {member.node?.image?.large && (
         <img
           src={member.node.image.large}
           alt={member.node.name.full}
-          className="staff-image"
+          className="staff-image" style={{width: "120px", height: "100px"}}
         />
       )}
       <Typography variant="body1" className="staff-name">

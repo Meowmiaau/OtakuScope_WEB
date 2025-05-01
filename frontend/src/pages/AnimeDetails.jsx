@@ -331,17 +331,19 @@ const AnimeDetails = () => {
           <>
             <div className="banner">
               {anime.bannerImage ? (
+                <div className="banner-fade">
                 <img
                   src={anime.bannerImage}
                   alt="Banner"
                   className="banner-img"
                 />
+              </div>
               ) : (
                 <div className="no-banner">No Banner</div>
               )}
             </div>
 
-            <div className="anime-content">
+            <div className="anime-content" style={{ marginTop: "20px" }}> 
               <div className="anime-cover">
                 {anime.coverImage?.large ? (
                   <img src={anime.coverImage.large} alt={anime.title.romaji} />
@@ -350,7 +352,7 @@ const AnimeDetails = () => {
                 )}
               </div>
 
-              <div className="anime-info">
+              <div className="anime-info" style={{ marginTop: "20px" }}>
                 <Typography variant="h3" className="Title">
                   {anime.title.romaji}
                 </Typography>
@@ -545,7 +547,7 @@ const AnimeDetails = () => {
                     return acc;
                   }, {})
                 )
-                  .slice(0, 7) // Limit to top 6 characters
+                  .slice(0, 5) // Limit to top 6 characters
                   .map(([characterName, data]) => (
                     <div
                       key={characterName}
@@ -554,7 +556,7 @@ const AnimeDetails = () => {
                         backgroundColor: "#585454",
                         marginLeft: "-17px",
                         borderRadius: "5px",
-                        width: "180px",
+                        width: "190px",
                         height: "250px",
                         marginRight: "-25px",
                         padding: "5px",
@@ -568,8 +570,12 @@ const AnimeDetails = () => {
                         />
                       </div>
                       <div>
-                        <p className="character-name">{characterName}</p>
-                        <p className="character-role">{data.role}</p>
+                        <p className="character-name" style={{
+                        marginLeft: "17px",
+                        }}>{characterName}</p>
+                        <p className="character-role"style={{
+                        marginLeft: "17px",
+                        }}>{data.role}</p>
                       </div>
 
                       {/* Character Info */}
@@ -608,11 +614,11 @@ const AnimeDetails = () => {
           </div>
         </div>
         {recommendations.length > 0 && (
-          <Box className="recommendations-section" sx={{ mt: 5 }}>
-            <Typography variant="h4" sx={{ mb: 2 }}>
+          <Box className="recommendations-section" sx={{ mt: 5 , width: 1750,marginLeft: "25px"}}>
+            <Typography variant="h4" sx={{ mb: 2 ,color:"#79bcdb", fontWeight: "bold"}}>
               Recommended Anime
             </Typography>
-            <Box display="flex" flexWrap="wrap" gap={3}>
+            <Box display="flex" flexWrap="wrap" gap={12}>
               {recommendations.map((rec, index) => {
                 console.log("Recommendation data:", rec);
                 return (
@@ -620,10 +626,10 @@ const AnimeDetails = () => {
                   key={index}
                   p={2}
                   sx={{
-                    width: 250,
+                    width: 230,
                     border: "1px solid #ccc",
                     borderRadius: "12px",
-                    backgroundColor: "#2b2b2b",
+                    backgroundColor: "rgb(59, 56, 56)",
                     color: "white",
                     transition: "transform 0.2s",
                     "&:hover": {
@@ -631,22 +637,14 @@ const AnimeDetails = () => {
                     },
                   }}
                 >
-                  <Link
-                    to={`/anime/${rec.Mal_id}`}
-                    style={{
-                      textDecoration: "none",
-                      color: "#90caf9",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    <Typography variant="h6" sx={{ mb: 1 }}>
+                    <Typography variant="h6" sx={{ mb: 1 , color: "rgb(169, 126, 248)",}}>
                       {rec.Title}
                     </Typography>
-                  </Link>
-                  <Typography variant="body2" sx={{ fontStyle: "italic" }}>
+                  
+                  <Typography variant="body2" sx={{ fontStyle: "italic" ,color: "rgb(85, 223, 193)",}}>
                     {rec.Genres}
                   </Typography>
-                  <Typography variant="body2" sx={{ mt: 1 }}>
+                  <Typography variant="body2" sx={{ mt: 2 ,fontSize: "17px"}}>
                     {rec.Synopsis?.substring(0, 150) ||
                       "No synopsis available."}
                   </Typography>

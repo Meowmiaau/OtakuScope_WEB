@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 import "../styles/Profile.css";
+import Navbar from "../components/Navbar";
 
 const Profile = () => {
   // Fetch username from localStorage directly
@@ -185,7 +186,7 @@ const Profile = () => {
 
   return (
     <div className="profileContainer">
-
+<Navbar/>
       {/* Avatar & Banner Section */}
       <div className="profileHeader">
         {/* Banner with Background & Controls */}
@@ -199,10 +200,7 @@ const Profile = () => {
             height:400,
           }}
         >
-          {/* LOGOUT Button */}
-          <button onClick={handleLogout} className="logoutButton">
-         Logout
-          </button>
+          
 
         </div>
 

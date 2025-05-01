@@ -14,6 +14,7 @@ import Staff from './components/Staff';
 import Status from './components/Status';
 import AllLists from './pages/AllLists';
 import ListDetailsPublic from './pages/ListDetailsPublic';
+import TopAnime from "./pages/TopAnime";
 
 const theme = createTheme({
     palette: {
@@ -45,7 +46,7 @@ const App = () => (
                 <Route path="/lists/:listId" element={<ListDetails />} />
                 <Route path="/profile/:username" element={<Profile />} />
                 <Route path="/public-list/:listId" element={<ListDetailsPublic />} />
-                
+                <Route path="/top-anime" element={<TopAnime />} />
             </Routes>
         </Router>
     </ThemeProvider>

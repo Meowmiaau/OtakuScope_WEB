@@ -1,0 +1,23 @@
+.top-anime-preview {
+    margin-bottom: 2rem;
+  }
+  
+  .view-all-button {
+    display: flex;
+    align-items: center;
+    color: #4dafdd;
+    text-transform: none;
+  }
+  
+  .view-all-button:hover {
+    color: #3db4f2;
+    background-color: rgba(61, 180, 242, 0.1);
+  }
+  
+  .top-anime-item {
+    transition: background-color 0.2s;
+  }
+  
+  .top-anime-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }

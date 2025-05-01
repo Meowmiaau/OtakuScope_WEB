@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 import "../styles/Profile.css";
 import Navbar from "../components/Navbar";
@@ -11,8 +11,11 @@ const Profile = () => {
   const [editingTab, setEditingTab] = useState("profileEditing");
   const [avatar, setAvatar] = useState(localStorage.getItem("avatar") || "/AnimeGirl.png");
   const [banner, setBanner] = useState(localStorage.getItem("banner") || "/AnimeBanner.jpg");
+  const [activeTab, setActiveTab] = useState("Stats");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate(); // Added for navigation functionality if needed
 
+    //activeTab as dependency
 
   useEffect(() => {
     // Retrieve username from localStorage
@@ -24,7 +27,63 @@ const Profile = () => {
     }
   }, [navigate]);
 
-  const [activeTab, setActiveTab] = useState("Overview");
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+          const token = localStorage.getItem('token');
+          if (!token) {
+              console.error("No authentication token found");
+              return; // Exit if no token is available
+          }
+          
+          console.log("Fetching stats with token:", token); // Add this to debug
+          
+          const response = await fetch('http://localhost:5000/api/profile/stats', {
+              method: 'GET', // Explicitly set method
+              headers: { 
+                  'Authorization': `Bearer ${token}`,
+                  'Content-Type': 'application/json'
+              }
+          });
+          
+          if (!response.ok) {
+              const errorText = await response.text();
+              throw new Error(`Failed to fetch stats: ${response.status} ${errorText}`);
+          }
+          
+          const data = await response.json();
+          console.log("Stats data fetched from API:", data); // Keep this log
+          
+          // Update state with the fetched data
+          setStats({
+              totalAnime: data.totalAnime || 0,
+              watching: data.watching || 0,
+              watched: data.watched || 0,
+              favoritesCount: data.favoritesCount || 0,
+              currentlyWatching: data.currentlyWatching || [],
+              favoriteAnime: data.favoriteAnime || [],
+              distribution: {
+                  watching: parseFloat(data.distribution.watching) || 0,
+                  watched: parseFloat(data.distribution.watched) || 0,
+                  plan_to_watch: parseFloat(data.distribution.plan_to_watch) || 0
+              }
+          });
+      } catch (error) {
+          console.error("Fetch error:", error);
+          // Consider adding user-facing error handling here
+        } finally {
+          setIsLoading(false);
+          }
+  };
+
+    // Only fetch when Stats tab is active
+    if (activeTab === 'Stats') {
+        console.log("Initiating stats fetch for tab:", activeTab);
+        fetchStats();
+    }
+  }, [activeTab]);
+
+  
   const [showDropdown, setShowDropdown] = useState(false); // Controls dropdown visibility
   const storeAvatars = [
     "/AnimeBird.jpg",
@@ -61,6 +120,19 @@ const Profile = () => {
     "/Sunset.jpg"
 ];
 
+  const [stats, setStats] = useState({
+    totalAnime: 0,
+    watching: 0,
+    watched: 0,
+    favoritesCount: 0,
+    currentlyWatching: [],
+    favoriteAnime: [],
+    distribution: {
+      watching: 0,
+      watched: 0,
+      plan_to_watch: 0
+    }
+  });
 
   const handleAvatarChange = (event) => {
     const fileInput = event.target; // Store reference to the input element
@@ -183,10 +255,9 @@ const Profile = () => {
     navigate('/'); // Redirect to the Get Started page
   };
 
-
-  return (
+return (
     <div className="profileContainer">
-<Navbar/>
+      <Navbar /> 
       {/* Avatar & Banner Section */}
       <div className="profileHeader">
         {/* Banner with Background & Controls */}
@@ -196,8 +267,6 @@ const Profile = () => {
             backgroundImage: `url(${banner})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            width:1750,
-            height:400,
           }}
         >
           
@@ -363,8 +432,9 @@ const Profile = () => {
       <hr className="bar"></hr>
 
       {/* Profile Options Bar */}
-      <div className="profileNav">
-        {[
+
+      {/*<div className="profileNav">
+         {[
           "Overview",
           "Anime List",
           "Manga List",
@@ -382,16 +452,121 @@ const Profile = () => {
             {tab}
           </button>
         ))}
-      </div>
+      </div> */}
 
-      {/* Content Display */}
+      
       <div className="profileContent">
+        {/* Content Display 
         {activeTab === "Overview" && (
           <div className="overview">
             <div className="animeColumn">Anime interactions go here...</div>
             <div className="actionsColumn">Action log goes here...</div>
           </div>
-        )}
+        )}*/}
+
+      {activeTab === "Stats" && (
+        <div className="statsContainer">
+          <h2 className="statsHeader">{username}'s Statistics</h2>
+    
+          {isLoading ? (
+            <div className="loadingStats">Loading statistics...</div>
+          ) : (
+            <>
+              {/* Quick Stats Overview */}
+              <div className="quickStats">
+                <div className="statCard">
+                  <div className="statNumber">{stats.totalAnime}</div>
+                  <div className="statLabel">Total Anime</div>
+                </div>
+                <div className="statCard">
+                  <div className="statNumber">{stats.watching}</div>
+                  <div className="statLabel">Watching</div>
+                </div>
+                <div className="statCard">
+                  <div className="statNumber">{stats.watched}</div>
+                  <div className="statLabel">Completed</div>
+                </div>
+                <div className="statCard">
+                  <div className="statNumber">{stats.favoritesCount}</div>
+                  <div className="statLabel">Favorites</div>
+                </div>
+              </div>
+        
+              {/* Detailed Sections */}
+              <div className="statsSections">
+                {/* Currently Watching */}
+                <div className="statsSection">
+                  <h3>Currently Watching ({stats.watching})</h3>
+                  {stats.currentlyWatching && stats.currentlyWatching.length > 0 ? (
+                    <div className="animeGrid">
+                      {stats.currentlyWatching.map(anime => (
+                        <Link to={`/anime/${anime.id}`} key={anime.id}>
+                          <div className="animeCard">
+                            <img 
+                              src={`https://img.anili.st/media/${anime.id}`} 
+                              alt={anime.title} 
+                              onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = '/default-anime.jpg';
+                              }}
+                            />
+                            <div className="animeTitle">{anime.title}</div>
+                          </div>
+                        </Link>
+                     ))}
+                    </div>
+                  ) : (
+                    <p className="noDataMessage">No currently watching anime</p>
+                  )}
+                </div>
+
+                {/* Favorite Anime */}
+                <div className="statsSection">
+                  <h3>Favorite Anime ({stats.favoritesCount})</h3>
+                 {stats.favoriteAnime && stats.favoriteAnime.length > 0 ? (
+                    <div className="animeGrid">
+                      {stats.favoriteAnime.map(anime => (
+                        <Link to={`/anime/${anime.id}`} key={anime.id}>
+                          <div className="animeCard favorite">
+                            <img 
+                              src={`https://img.anili.st/media/${anime.id}`} 
+                              alt={anime.title} 
+                              onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = '/default-anime.jpg';
+                              }}
+                            />
+                            <div className="animeTitle">{anime.title}</div>
+                            <div className="score">★ {anime.score || 'N/A'}</div>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="noDataMessage">No favorite anime yet</p>
+                  )}
+                </div>
+
+                {/* Anime Distribution */}
+                <div className="statsSection">
+                  <h3>Anime Distribution</h3>
+                  <div className="statusChart">
+                    <div className="chartBar" style={{ width: `${stats.distribution.watching}%` }}>
+                      <span>Watching ({stats.distribution.watching}%)</span>
+                    </div>
+                    <div className="chartBar" style={{ width: `${stats.distribution.watched}%` }}>
+                      <span>Watched ({stats.distribution.watched}%)</span>
+                    </div>
+                    <div className="chartBar" style={{ width: `${stats.distribution.plan_to_watch}%` }}>
+                      <span>Plan to Watch ({stats.distribution.plan_to_watch}%)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      )}
       </div>
     </div>
   );

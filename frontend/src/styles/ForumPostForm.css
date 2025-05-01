@@ -1,0 +1,126 @@
+/* frontend/src/styles/ForumPostForm.css */
+.forum-post-form {
+    margin-bottom: 32px;
+    margin-top: 12px;
+    padding: 20px;
+    background-color: rgba(211, 234, 236, 0.65);
+    border-radius: 12px;
+  }
+
+  .form-title {
+    color: #333;
+    font-weight: 500 !important;
+  }
+
+  .user-info-container {
+    display: flex;
+    align-items: center;
+    margin-top: 18px;
+    color: #181616;
+  }
+
+  .user-avatar {
+    margin-right: 16px;
+    width: 60px !important;
+    height: 60px !important;
+    border: 2px solid rgb(0, 167, 245) !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .username-text {
+    color: #222;
+    font-weight: 500 !important;
+  }
+
+  .form-field {
+    margin-bottom: 16px;
+    margin-top: 21px !important;
+  }
+
+  .form-input {
+    color: #121212 !important;
+  }
+
+  .form-label {
+    color: rgb(55, 58, 59) !important;
+  }
+
+  .tags-container {
+    margin-bottom: 16px;
+  }
+
+  .tag-input-field {
+    margin-bottom: 8px;
+    margin-top: 21px !important;
+  }
+
+  .add-tag-button {
+    color: #121212 !important;
+    text-transform: none;
+    min-width: 60px;
+  }
+
+  .tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .tag-chip {
+    background-color: rgb(0, 167, 245) !important;
+    color: #222 !important;
+  }
+
+  .tag-chip .MuiChip-deleteIcon {
+    color: #121212 !important;
+  }
+
+  .submit-button {
+    background-color: rgb(0, 167, 245) !important;
+    color: #121212 !important;
+    font-weight: 600;
+    padding: 8px 24px;
+    transition: all 0.3s ease;
+  }
+
+  .submit-button:hover {
+    background-color: rgb(45, 184, 248) !important;
+  }
+
+/* sstyles to override the focus border color */
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #121212 !important;
+  border-width: 1px !important;
+  font-weight: 500 !important;
+}
+
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: rgba(0, 167, 245, 0.5) !important;
+}
+
+.MuiInputLabel-root.Mui-focused {
+  color: #121212 !important;
+  font-weight: 500 !important;
+}
+
+  /* Error text styling */
+  .MuiFormHelperText-root.Mui-error {
+    color: #ff4081 !important;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .form-title {
+      font-size: 1.25rem;
+    }
+
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+    }
+
+    .username-text {
+      font-size: 0.9rem;
+    }
+  }

@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Profile from './components/Profile';
 import Signup from './components/Signup';
 import AnimeDetails from './pages/AnimeDetails';
+import Forum from './pages/Forum';
 import Home from './pages/Home';
 import ListDetails from './pages/ListDetails';
 import Lists from './pages/Lists';

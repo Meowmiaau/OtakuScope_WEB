@@ -337,6 +337,41 @@ INSERT INTO `forum_tags` VALUES (1,'Discussion'),(2,'Recommendation'),(3,'Review
 UNLOCK TABLES;
 
 --
+-- Table structure for table `post_likes`
+--
+
+DROP TABLE IF EXISTS `post_likes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `post_likes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `post_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `reaction_type` enum('like','love','care','haha','wow','sad','angry') DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unique_reaction` (`post_id`,`user_id`),
+  KEY `post_id` (`post_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `forum_reactions_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `forum_posts` (`id`),
+  CONSTRAINT `forum_reactions_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `post_likes`
+--
+
+LOCK TABLES `post_likes` WRITE;
+/*!40000 ALTER TABLE `post_likes` DISABLE KEYS */;
+INSERT INTO `post_likes` (`post_id`, `user_id`, `reaction_type`) VALUES
+(1, 2, 'like'),
+(2, 3, 'love');
+/*!40000 ALTER TABLE `post_likes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+--
 -- Table structure for table `lists`
 --
 
@@ -661,27 +696,27 @@ BEGIN
     DECLARE watched_count INT DEFAULT 0;
     DECLARE watching_count INT DEFAULT 0;
     DECLARE plan_to_watch_count INT DEFAULT 0;
-    
+
     SELECT COUNT(DISTINCT anime_id) INTO total_count
     FROM anime_details
     WHERE user_id = user_id_param;
-    
+
     SELECT COUNT(DISTINCT anime_id) INTO watched_count
     FROM anime_details
     WHERE user_id = user_id_param
       AND status = 'Watched';
-      
+
     SELECT COUNT(DISTINCT anime_id) INTO watching_count
     FROM anime_details
     WHERE user_id = user_id_param
       AND status = 'Watching';
-    
+
     SELECT COUNT(DISTINCT anime_id) INTO plan_to_watch_count
     FROM anime_details
     WHERE user_id = user_id_param
       AND status = 'Plan to Watch';
-      
-    SELECT 
+
+    SELECT
         IF(total_count = 0, 0, ROUND((watched_count / total_count) * 100, 2)) AS watched_percentage,
         IF(total_count = 0, 0, ROUND((watching_count / total_count) * 100, 2)) AS watching_percentage,
         IF(total_count = 0, 0, ROUND((plan_to_watch_count / total_count) * 100, 2)) AS plan_to_watch_percentage;

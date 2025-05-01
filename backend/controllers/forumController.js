@@ -62,7 +62,13 @@ exports.getPosts = async (req, res) => {
             SELECT fp.*, u.username, u.profile_picture,
             GROUP_CONCAT(ft.name) as tags,
             (SELECT COUNT(*) FROM comments c WHERE c.post_id = fp.id) as comment_count,
-            (SELECT COUNT(*) FROM post_likes pl WHERE pl.post_id = fp.id) as like_count
+            (SELECT COUNT(*) FROM post_likes pl WHERE pl.post_id = fp.id AND pl.reaction_type = 'like') as like_count,
+            (SELECT COUNT(*) FROM post_likes pl WHERE pl.post_id = fp.id AND pl.reaction_type = 'love') as love_count,
+            (SELECT COUNT(*) FROM post_likes pl WHERE pl.post_id = fp.id AND pl.reaction_type = 'care') as care_count,
+            (SELECT COUNT(*) FROM post_likes pl WHERE pl.post_id = fp.id AND pl.reaction_type = 'haha') as haha_count,
+            (SELECT COUNT(*) FROM post_likes pl WHERE pl.post_id = fp.id AND pl.reaction_type = 'wow') as wow_count,
+            (SELECT COUNT(*) FROM post_likes pl WHERE pl.post_id = fp.id AND pl.reaction_type = 'sad') as sad_count,
+            (SELECT COUNT(*) FROM post_likes pl WHERE pl.post_id = fp.id AND pl.reaction_type = 'angry') as angry_count
             FROM forum_posts fp
             JOIN users u ON fp.user_id = u.id
             LEFT JOIN forum_post_tags fpt ON fp.id = fpt.post_id
@@ -307,3 +313,120 @@ exports.updatePost = async (req, res) => {
         if (conn) conn.release();
     }
 };
+
+// Remove reaction
+exports.removeReaction = async (req, res) => {
+    let conn;
+    try {
+        conn = await getDBConnection();
+        const { id: post_id } = req.params;
+        const user_id = req.userId;
+
+        await conn.query(
+            'DELETE FROM post_likes WHERE post_id = ? AND user_id = ?',
+            [post_id, user_id]
+        );
+
+        res.status(200).json({ message: 'Reaction removed' });
+    } catch (error) {
+        console.error('Error removing reaction:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    } finally {
+        if (conn) conn.release();
+    }
+};
+
+// Get user's posts
+exports.getUserPosts = async (req, res) => {
+    let conn;
+    try {
+        conn = await getDBConnection();
+        const { userId } = req.params;
+        const { offset = 0, limit = 10 } = req.query;
+
+        const [posts] = await conn.query(`
+            SELECT fp.*, u.username, u.profile_picture,
+            GROUP_CONCAT(ft.name) as tags
+            FROM forum_posts fp
+            JOIN users u ON fp.user_id = u.id
+            LEFT JOIN forum_post_tags fpt ON fp.id = fpt.post_id
+            LEFT JOIN forum_tags ft ON fpt.tag_id = ft.id
+            WHERE fp.user_id = ?
+            GROUP BY fp.id
+            ORDER BY fp.created_at DESC
+            LIMIT ? OFFSET ?
+        `, [userId, parseInt(limit), parseInt(offset)]);
+
+        res.json(posts);
+    } catch (error) {
+        console.error('Error fetching user posts:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    } finally {
+        if (conn) conn.release();
+    }
+};
+
+exports.checkUserReaction = async (req, res) => {
+    let conn;
+    try {
+        conn = await getDBConnection();
+        const { id: post_id } = req.params;
+        const user_id = req.userId;
+
+        const [reaction] = await conn.query(
+            'SELECT reaction_type FROM post_likes WHERE post_id = ? AND user_id = ?',
+            [post_id, user_id]
+        );
+
+        res.json({ hasReacted: reaction.length > 0, reaction: reaction[0]?.reaction_type });
+    } catch (error) {
+        console.error('Error fetching user posts:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    } finally {
+        if (conn) conn.release();
+    }
+};
+
+
+// Get comments for a specific post
+exports.getComments = async (req, res) => {
+    let conn;
+    try {
+      conn = await getDBConnection();
+      const { id: post_id } = req.params;
+      const { offset = 0, limit = 10 } = req.query;
+
+      // Get comments with user info
+      const [comments] = await conn.query(`
+        SELECT
+          c.id,
+          c.content,
+          c.created_at,
+          c.last_edited,
+          u.id as user_id,
+          u.username,
+          u.profile_picture
+        FROM comments c
+        JOIN users u ON c.user_id = u.id
+        WHERE c.post_id = ?
+        ORDER BY c.created_at DESC
+        LIMIT ? OFFSET ?
+      `, [post_id, parseInt(limit), parseInt(offset)]);
+
+      // Get total count for pagination
+      const [[{ total }]] = await conn.query(
+        'SELECT COUNT(*) as total FROM comments WHERE post_id = ?',
+        [post_id]
+      );
+
+      res.json({ comments, total });
+    } catch (error) {
+      console.error('Error fetching comments:', error);
+      res.status(500).json({
+        error: 'Internal server error',
+        details: process.env.NODE_ENV === 'development' ? error.message : undefined
+      });
+    } finally {
+      if (conn) conn.release();
+    }
+  };

@@ -1,0 +1,192 @@
+/* frontend/src/styles/ForumPost.css */
+.forum-post-container {
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .post-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .user-details {
+    margin-left: 16px;
+  }
+
+  .username {
+    color: #222;
+    font-weight: bold;
+  }
+
+  .post-time {
+    color: #787575;
+    display: block;
+  }
+
+  .post-actions {
+    display: flex;
+    align-items: center;
+  }
+
+  .menu-button {
+    color: rgb(0, 167, 245) !important;
+  }
+
+  .post-menu {
+    margin-top: 8px;
+  }
+
+  .menu-icon {
+    margin-right: 8px;
+    color: rgb(0, 167, 245);
+  }
+
+  .delete-icon {
+    margin-right: 8px;
+    color: #ff4081 !important;
+  }
+
+  .post-title {
+    color: rgb(0, 167, 245);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .post-content {
+    color: #222;
+    margin-bottom: 16px;
+    white-space: pre-line;
+    line-height: 1.6;
+  }
+
+  .edit-container {
+    margin-bottom: 16px;
+  }
+
+  .edit-field .MuiInputBase-root {
+    color: white;
+  }
+
+  .edit-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .save-button {
+    background-color: #bf00ff !important;
+    color: white !important;
+  }
+
+  .cancel-button {
+    color: #bf00ff !important;
+    border-color: #bf00ff !important;
+  }
+
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .post-tag {
+    background-color: #333 !important;
+    color: #00f0ff !important;
+  }
+
+  .post-tag:hover {
+    background-color: #444 !important;
+  }
+
+  .reactions-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .reaction-item {
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+  }
+
+  .reaction-button {
+    padding: 4px !important;
+  }
+
+  .reaction-count {
+    color: #aaa;
+    margin-left: 4px;
+  }
+
+  .comments-section {
+    margin-top: 16px;
+  }
+
+  .comments-toggle {
+    color: #00f0ff !important;
+    text-transform: none !important;
+    padding: 0 !important;
+    margin-bottom: 8px !important;
+  }
+
+  .comments-container {
+    padding-left: 16px;
+    border-left: 2px solid #333;
+  }
+
+  .add-comment {
+    display: flex;
+    margin-bottom: 16px;
+  }
+
+  .comment-avatar {
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+    margin-top: 4px;
+  }
+
+  .comment-input .MuiInputBase-root {
+    color: white !important;
+  }
+
+  .submit-comment {
+    color: #bf00ff !important;
+    padding: 8px !important;
+  }
+
+  /* Responsive styles */
+  @media (max-width: 600px) {
+    .forum-post-container {
+      padding: 16px;
+    }
+
+    .user-avatar {
+      width: 36px;
+      height: 36px;
+    }
+
+    .post-title {
+      font-size: 1.1rem;
+    }
+
+    .reaction-item {
+      margin-right: 12px;
+    }
+  }

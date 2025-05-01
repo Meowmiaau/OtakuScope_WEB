@@ -1,0 +1,27 @@
+/* frontend/src/styles/ForumPagination.css */
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 24px;
+  gap: 16px;
+}
+
+.paginationButton {
+  color: #00f0ff;
+  border-color: #00f0ff;
+}
+
+.paginationButton:hover {
+  border-color: #00f0ff;
+  background-color: rgba(0, 240, 255, 0.1);
+}
+
+.paginationButton:disabled {
+  border-color: #555;
+  color: #555;
+}
+
+.pageText {
+  color: white;
+}

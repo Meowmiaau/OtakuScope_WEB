@@ -1,0 +1,90 @@
+/* frontend/src/styles/ForumTagFilter.css */
+.tag-filter-container {
+    display: flex;
+    align-items: center;
+    margin-right: 16px;
+  }
+
+  .tag-autocomplete {
+    width: 250px;
+  }
+
+  .tag-input .MuiOutlinedInput-root {
+    color: white;
+  }
+
+  .tag-input .MuiOutlinedInput-notchedOutline {
+    border-color: #555;
+  }
+
+  .tag-input:hover .MuiOutlinedInput-notchedOutline {
+    border-color: rgb(0, 167, 245);
+  }
+
+  .tag-input .MuiInputLabel-root {
+    color: rgb(0, 167, 245);
+  }
+
+  .tag-input .Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: rgb(0, 167, 245) !important;
+  }
+
+  .tag-popper {
+    width: fit-content;
+  }
+
+  .tag-option {
+    display: flex !important;
+    align-items: center;
+    padding: 8px 16px !important;
+  }
+
+  .tag-option-chip {
+    background-color: #333 !important;
+    color: rgb(0, 167, 245) !important;
+    margin-right: 8px !important;
+  }
+
+  .tag-option-count {
+    color: #aaa;
+    font-size: 0.75rem;
+  }
+
+  .selected-tag-chip {
+    background-color: rgb(0, 167, 245) !important;
+    color: white !important;
+  }
+
+  .selected-tag-chip .MuiChip-deleteIcon {
+    color: white !important;
+  }
+
+  .clear-filter-button {
+    color: rgb(0, 167, 245) !important;
+    text-transform: none !important;
+    margin-left: 8px !important;
+    padding: 6px 12px !important;
+  }
+
+  .clear-filter-button:hover {
+    background-color: rgba(191, 0, 255, 0.1) !important;
+  }
+
+  /* Responsive styles */
+  @media (max-width: 600px) {
+    .tag-filter-container {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-right: 0;
+    }
+
+    .tag-autocomplete {
+      width: 100%;
+      margin-bottom: 8px;
+    }
+
+    .clear-filter-button {
+      margin-left: 0 !important;
+      align-self: flex-end;
+    }
+  }

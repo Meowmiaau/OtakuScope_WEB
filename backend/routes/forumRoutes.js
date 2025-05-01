@@ -4,28 +4,22 @@ const router = express.Router();
 const forumController = require('../controllers/forumController');
 const verifyToken = require('../middleware/authMiddleware');
 
-// Create post (requires auth)
+
 router.post('/', verifyToken, forumController.createPost);
-
-// Get posts (public)
 router.get('/', forumController.getPosts);
-
-// Get post details (public)
-router.get('/:id', forumController.getPostDetails);
-
-// Add reaction (requires auth)
-router.post('/reaction', verifyToken, forumController.addReaction);
-
-// Add comment (requires auth)
-router.post('/comment', verifyToken, forumController.addComment);
-
-// Delete post (requires auth)
-router.delete('/:id', verifyToken, forumController.deletePost);
-
-// Forum
 router.get('/tags', forumController.getTags);
-router.get('/', forumController.getPosts);
-router.post('/', verifyToken, forumController.createPost);
 router.get('/:id', forumController.getPostDetails);
+router.delete('/:id', verifyToken, forumController.deletePost);
+router.put('/:id', verifyToken, forumController.updatePost);
+// Reactions
+router.post('/:id/react', verifyToken, forumController.addReaction); // More RESTful path
+router.delete('/:id/react', verifyToken, forumController.removeReaction);
+// Comments
+router.post('/:id/comments', verifyToken, forumController.addComment); // More RESTful
+router.get('/:id/comments', forumController.getComments);
+
+router.get('/user/:userId/posts', verifyToken, forumController.getUserPosts);
+router.get('/:id/user-reaction', verifyToken, forumController.checkUserReaction);
+
 
 module.exports = router;

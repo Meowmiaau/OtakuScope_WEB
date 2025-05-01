@@ -1,0 +1,15 @@
+.reaction-item {
+    transition: transform 0.2s;
+  }
+
+  .reaction-item:hover {
+    transform: scale(1.1);
+  }
+
+  .mention {
+    color: #1976d2;
+    font-weight: bold;
+    background-color: #e3f2fd;
+    padding: 0 2px;
+    border-radius: 2px;
+  }

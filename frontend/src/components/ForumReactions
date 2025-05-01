@@ -1,0 +1,64 @@
+// frontend/src/components/ForumReactions.js
+
+import React from 'react';
+import PropTypes from 'prop-types';
+import {
+  IconButton,
+  Box,
+  Typography,
+  Tooltip
+} from '@mui/material';
+import {
+  ThumbUp,
+  Favorite,
+  SentimentSatisfied,
+  MoodBad
+} from '@mui/icons-material';
+import './../styles/ForumReactions.css';
+
+const reactions = [
+  { type: 'like', icon: <ThumbUp fontSize="small" />, label: 'Like', color: '#00f0ff' },
+  { type: 'love', icon: <Favorite fontSize="small" />, label: 'Love', color: '#ff4081' },
+  { type: 'haha', icon: <SentimentSatisfied fontSize="small" />, label: 'Haha', color: '#ffeb3b' },
+  { type: 'sad', icon: <MoodBad fontSize="small" />, label: 'Sad', color: '#9c27b0' }
+];
+
+const ForumReactions = ({
+  postId,
+  reactionCounts,
+  userReaction,
+  onReact
+}) => {
+  return (
+    <Box className="reactions-container">
+      {reactions.map((reaction) => (
+        <Tooltip key={reaction.type} title={reaction.label}>
+          <Box className="reaction-item">
+            <IconButton
+              size="small"
+              onClick={() => onReact(postId, reaction.type)}
+              sx={{
+                color: userReaction === reaction.type ? reaction.color : 'inherit',
+                '&:hover': { color: reaction.color }
+              }}
+            >
+              {reaction.icon}
+            </IconButton>
+            <Typography variant="caption">
+              {reactionCounts[reaction.type] || 0}
+            </Typography>
+          </Box>
+        </Tooltip>
+      ))}
+    </Box>
+  );
+};
+
+ForumReactions.propTypes = {
+  postId: PropTypes.string.isRequired,
+  reactionCounts: PropTypes.object.isRequired,
+  userReaction: PropTypes.string,
+  onReact: PropTypes.func.isRequired
+};
+
+export default ForumReactions;

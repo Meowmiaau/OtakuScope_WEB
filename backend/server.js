@@ -11,7 +11,10 @@ const forumRoutes = require('./routes/forumRoutes');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors(
+    {origin: "http://localhost:3000", // frontend origin
+    credentials: true}
+));
 app.use(express.json());
 
 // Routes
@@ -21,18 +24,19 @@ app.use('/api/lists', verifyToken, listRoutes); // Protect list routes with the 
 app.use('/api/reviews', reviewRoutes);
 // For forums:
 app.use('/api/forum', forumRoutes);
-app.use('/api/forum/posts', forumRoutes);
 
 const PORT = process.env.PORT || 5000;
 
 // Start the server
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-// Check DB connection on startup
 (async () => {
     try {
         await checkConnection();
         console.log('Database connected successfully');
+
+        app.listen(PORT, () => {
+            console.log(`Server running on http://localhost:${PORT}`);
+        });
+
     } catch (error) {
         console.error('Error connecting to database:', error);
         process.exit(1); // Exit if DB connection fails

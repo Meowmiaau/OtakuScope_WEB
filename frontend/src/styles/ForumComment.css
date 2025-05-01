@@ -1,0 +1,224 @@
+/* frontend/src/styles/ForumComment.css */
+.comment-container {
+    margin-bottom: 16px;
+  }
+
+  .comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .comment-user-info {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .comment-avatar {
+    width: 32px;
+    height: 32px;
+    margin-top: 4px;
+    border: 1px solid #555;
+  }
+
+  .comment-content-container {
+    margin-left: 12px;
+    flex-grow: 1;
+  }
+
+  .comment-username {
+    color: white;
+    font-weight: bold;
+    font-size: 0.85rem;
+  }
+
+  .comment-text {
+    color: white;
+    white-space: pre-line;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .comment-time {
+    color: #aaa;
+    display: block;
+    font-size: 0.75rem;
+    margin-top: 4px;
+  }
+
+  .comment-actions {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .comment-menu-button {
+    color: rgb(0, 167, 245) !important;
+    padding: 4px !important;
+  }
+
+  .comment-menu-button:hover {
+    background-color: rgba(0, 240, 255, 0.1) !important;
+  }
+
+  .comment-dropdown-menu .MuiPaper-root {
+    background-color: #2a2a2a;
+    color: white;
+  }
+
+  .comment-dropdown-menu .MuiMenuItem-root {
+    font-size: 0.85rem;
+  }
+
+  .comment-dropdown-menu .MuiMenuItem-root:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .menu-edit-icon {
+    margin-right: 8px;
+    color: rgb(0, 167, 245);
+  }
+
+  .menu-delete-icon {
+    margin-right: 8px;
+    color: #ff4081 !important;
+  }
+
+  .edit-comment-container {
+    margin-top: 4px;
+  }
+
+  .edit-comment-field .MuiInputBase-root {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+  }
+
+  .edit-comment-field .MuiOutlinedInput-notchedOutline {
+    border-color: #555 !important;
+  }
+
+  .edit-comment-field:hover .MuiOutlinedInput-notchedOutline {
+    border-color: rgb(0, 167, 245) !important;
+  }
+
+  .edit-comment-buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .save-comment-button {
+    background-color: rgb(0, 167, 245) !important;
+    color: white !important;
+    text-transform: none !important;
+    font-size: 0.75rem !important;
+    padding: 4px 12px !important;
+  }
+
+  .save-comment-button:hover {
+    background-color: rgb(0, 167, 245) !important;
+  }
+
+  .cancel-comment-button {
+    color: rgb(0, 167, 245) !important;
+    border-color: rgb(0, 167, 245) !important;
+    text-transform: none !important;
+    font-size: 0.75rem !important;
+    padding: 4px 12px !important;
+  }
+
+  .cancel-comment-button:hover {
+    border-color: rgb(0, 167, 245) !important;
+    color: rgb(0, 167, 245) !important;
+  }
+
+  .replies-container {
+    margin-left: 40px;
+    padding-left: 16px;
+    border-left: 1px solid #333;
+  }
+
+  .reply-toggle-button {
+    color: rgb(0, 167, 245) !important;
+    text-transform: none !important;
+    font-size: 0.75rem !important;
+    padding: 0 !important;
+    margin-top: 4px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .reply-toggle-button:hover {
+    background-color: transparent !important;
+    text-decoration: underline;
+  }
+
+  .reply-form-container {
+    display: flex;
+    margin-bottom: 12px;
+  }
+
+  .reply-avatar {
+    width: 32px;
+    height: 32px;
+    margin-top: 4px;
+    border: 1px solid #555;
+  }
+
+  .reply-input-container {
+    margin-left: 8px;
+    flex-grow: 1;
+  }
+
+  .reply-input-field .MuiInputBase-root {
+    color: white !important;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+  }
+
+  .reply-input-field .MuiOutlinedInput-notchedOutline {
+    border-color: #555 !important;
+  }
+
+  .reply-input-field:hover .MuiOutlinedInput-notchedOutline {
+    border-color: rgb(0, 167, 245) !important;
+  }
+
+  .submit-reply-button {
+    color: rgb(0, 167, 245) !important;
+    padding: 8px !important;
+  }
+
+  .submit-reply-button:hover {
+    color: rgb(0, 167, 245) !important;
+  }
+
+  .comment-divider {
+    border-color: #333 !important;
+    margin-top: 12px !important;
+  }
+
+  /* Responsive styles */
+  @media (max-width: 600px) {
+    .replies-container {
+      margin-left: 24px;
+      padding-left: 8px;
+    }
+
+    .comment-avatar {
+      width: 28px;
+      height: 28px;
+    }
+
+    .reply-avatar {
+      width: 28px;
+      height: 28px;
+    }
+
+    .comment-username {
+      font-size: 0.8rem;
+    }
+
+    .comment-text {
+      font-size: 0.85rem;
+    }
+  }
